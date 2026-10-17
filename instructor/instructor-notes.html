@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Lesson Title: Instructor Notes</title>
+<title>Foundations: Python and QGIS for Geospatial Work: Instructor Notes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="../assets/themetoggle.js"></script><link rel="stylesheet" type="text/css" href="../assets/styles.css">
 <script src="../assets/scripts.js" type="text/javascript"></script><!-- mathjax --><!-- NOTE: https://docs.mathjax.org/en/latest/output/mathml.html#mathml-support --><!-- Changes from V2 to V4: https://mathjax.github.io/MathJax-demos-web/convert-configuration/convert-configuration.html
@@ -41,15 +41,15 @@
     <div class="col-md-8">
       <div class="large-logo">
         <a href="index.html">
-        <img id="incubator-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo.svg"></a>
+        <img id="incubator-logo" alt="Foundations: Python and QGIS for Geospatial Work" src="../assets/images/incubator-logo.svg"></a>
 
-        <span class="badge text-bg-danger">
-          <abbr title="This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.">
+        <span class="badge text-bg-warning">
+          <abbr title="This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.">
             <a href="https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html" class="external-link alert-link">
-              <i aria-hidden="true" class="icon" data-feather="alert-octagon" style="border-radius: 5px"></i>
-              Pre-Alpha
+              <i aria-hidden="true" class="icon" data-feather="alert-triangle" style="border-radius: 5px"></i>
+              Alpha
             </a>
-            <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
+            <span class="visually-hidden">This lesson is in the alpha phase, which means that it has been taught once and lesson authors are iterating on feedback.</span>
           </abbr>
         </span>
 
@@ -100,10 +100,10 @@
     </button>
     <div class="nav-logo">
       <a href="index.html">
-      <img class="small-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo-sm.svg"></a>
+      <img class="small-logo" alt="Foundations: Python and QGIS for Geospatial Work" src="../assets/images/incubator-logo-sm.svg"></a>
     </div>
     <div class="lesson-title-md">
-      Lesson Title
+      Foundations: Python and QGIS for Geospatial Work
     </div>
     <div class="search-icon-sm">
       <!-- TODO: do not show until we have search
@@ -114,7 +114,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
           <span class="lesson-title">
-            Lesson Title
+            Foundations: Python and QGIS for Geospatial Work
           </span>
         </li>
         <li class="nav-item">
@@ -245,7 +245,55 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="introduction.html">1. Introduction to Foundations</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="python-basics.html">2. Python Basics</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="working-with-data.html">3. Working with Data</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush5">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading5">
+        <a href="geospatial-python.html">4. Geospatial Python Basics</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="qgisintro.html">5. Getting Started with QGIS: Your First Map</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -329,23 +377,145 @@
         <h1>Instructor Notes</h1>
         
 
-<p>This is a placeholder file. Please add content here.</p>
-<!--
-Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use.
- -->
-
-
-      <section id="aggregate-instructor-notes"><section id="introduction"><h2 class="section-heading"><a href="introduction.html">Using Markdown</a></h2>
+<section><h2 class="section-heading" id="overall-approach">Overall approach<a class="anchor" aria-label="anchor" href="#overall-approach"></a>
+</h2>
 <hr class="half-width">
-<h3 id="introduction-headingInstructor1">
-<a href="introduction.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#introduction-headingInstructor1"></a>
+<ul>
+<li>This module is for complete beginners. Each Python notebook takes 15
+to 25 minutes and covers one idea, with an exercise and its solution at
+the end. In a live session, teach the episode page briefly, then let
+learners work through the notebooks while helpers circulate.</li>
+<li>Suggested timing for a full day: Introduction 30 min; Python Basics
+(notebooks 2a to 2f) 2.5 hours; Working with Data (3a, 3b) 1 hour;
+Geospatial Python Basics (4a to 4c) 1.5 hours. Getting Started with QGIS
+(about 1.75 hours) works well as a separate session.</li>
+<li>Ask everyone to <strong>Save a copy in Drive</strong> before running
+anything.</li>
+<li>The examples use Indiana counties and Lafayette food stores
+throughout, so the same data reappears in later modules (Data
+Collection, Case Studies).</li>
+<li>The Python notebooks were rewritten for beginners from the Workshop
+2026 Session B notebook (<code>intro_python.ipynb</code>), which stays
+in its own repository unchanged.</li>
+</ul></section><section><h2 class="section-heading" id="episode-by-episode">Episode by episode<a class="anchor" aria-label="anchor" href="#episode-by-episode"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
-<p>Inline instructor notes can help inform instructors of timing
-challenges associated with the lessons. They appear in the “Instructor
-View”</p>
-<hr>
-<br></section></section>
+<ul>
+<li>The “Which tool?” challenge is a good opener: there is no single
+right answer for the visual check.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="python-basics">Python Basics<a class="anchor" aria-label="anchor" href="#python-basics"></a>
+</h3>
+<ul>
+<li>Normalize errors early: run the deliberate <code>SyntaxError</code>
+and <code>NameError</code> cells in notebook 2a together and read the
+last line aloud.</li>
+<li>The “numbers stored as text” idea (2b) comes back in every Census
+notebook and in the join notebook (4c).</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="working-with-data">Working with Data<a class="anchor" aria-label="anchor" href="#working-with-data"></a>
+</h3>
+<ul>
+<li>Point out that <code>describe()</code> averages the FIPS codes (3a).
+It is a memorable way to show why identifiers should be text.</li>
+<li>The log scale in the scatter plot (3b) is often new; show the same
+chart without it first.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="geospatial-python-basics">Geospatial Python Basics<a class="anchor" aria-label="anchor" href="#geospatial-python-basics"></a>
+</h3>
+<ul>
+<li>The wrong-CRS demonstration in 4b (Indiana ends up near the equator)
+makes the difference between <code>set_crs()</code> and
+<code>to_crs()</code> stick.</li>
+<li>In 4c, the failing join is deliberate. Let learners read the error
+before showing the fix.</li>
+<li>58 of the 64 food stores lie inside the city limits; all 17
+supermarkets do.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="getting-started-with-qgis">Getting Started with QGIS<a class="anchor" aria-label="anchor" href="#getting-started-with-qgis"></a>
+</h3>
+<ul>
+<li>Moved here from the Data Visualization module in October 2026. Data
+is loaded from this repository’s <code>data/</code> folder by URL.</li>
+<li>The OpenStreetMap basemap needs an internet connection; on a slow
+network, skip it.</li>
+<li>Loading from a web address (Layer &gt; Add Layer &gt; Add Vector
+Layer &gt; Protocol: HTTP(S)) avoids file downloads and path problems.
+If a network blocks it, the same GeoJSON files can be downloaded from
+the repository’s <code>data/</code> folder and loaded as files.</li>
+<li>In QGIS, the OpenStreetMap basemap works normally. (In Colab it does
+not, which is why the notebooks use an Esri basemap.)</li>
+<li>Learners often press <strong>OK</strong> instead of
+<strong>Apply</strong> while comparing classification modes; encourage
+<strong>Apply</strong> so the dialog stays open.</li>
+<li>Remind learners to rename layers before making a legend.</li>
+</ul>
+</div>
+</section><section><h2 class="section-heading" id="common-problems">Common problems<a class="anchor" aria-label="anchor" href="#common-problems"></a>
+</h2>
+<hr class="half-width">
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>NameError</code></td>
+<td>A cell was skipped</td>
+<td><strong>Runtime &gt; Run before</strong></td>
+</tr>
+<tr>
+<td>Colab forgot variables</td>
+<td>The session disconnected</td>
+<td>Reconnect and run all cells from the top</td>
+</tr>
+<tr>
+<td>
+<code>HTTPError</code> or timeout when reading data</td>
+<td>Network hiccup</td>
+<td>Rerun the cell</td>
+</tr>
+<tr>
+<td>A merge fails with “object and int64 columns”</td>
+<td>ID types differ</td>
+<td>Convert both with <code>.astype(str).str.zfill(5)</code>
+</td>
+</tr>
+<tr>
+<td>QGIS layer shows nothing</td>
+<td>Off screen, or behind the basemap</td>
+<td>Right-click &gt; <strong>Zoom to Layer</strong>; drag the layer
+above the basemap</td>
+</tr>
+</tbody>
+</table>
+<!--
+Links listed here can be reused across pages as [text][name].
+Add reference-style links below as needed.
+--></section><section id="aggregate-instructor-notes"><section id="introduction"><h2 class="section-heading"><a href="introduction.html">Introduction to Foundations</a></h2>
+<hr class="half-width"></section><section id="python-basics"><h2 class="section-heading"><a href="python-basics.html">Python Basics</a></h2>
+<hr class="half-width"></section><section id="working-with-data"><h2 class="section-heading"><a href="working-with-data.html">Working with Data</a></h2>
+<hr class="half-width"></section><section id="geospatial-python"><h2 class="section-heading"><a href="geospatial-python.html">Geospatial Python Basics</a></h2>
+<hr class="half-width"></section><section id="qgisintro"><h2 class="section-heading"><a href="qgisintro.html">Getting Started with QGIS: Your First Map</a></h2>
+<hr class="half-width"></section></section>
 </div>
     </main>
 </div>
@@ -358,14 +528,14 @@ View”</p>
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
 
-        <a href="https://github.com/carpentries/workbench-template-md/edit/main/README.md" class="external-link">Edit on GitHub</a>
+        <a href="https://github.com/SpatialTurn/Foundations/edit/main/README.md" class="external-link">Edit on GitHub</a>
 
 	
-        | <a href="https://github.com/carpentries/workbench-template-md/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
-        | <a href="https://github.com/carpentries/workbench-template-md/" class="external-link">Source</a></p>
+        | <a href="https://github.com/SpatialTurn/Foundations/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
+        | <a href="https://github.com/SpatialTurn/Foundations/" class="external-link">Source</a></p>
         <p>
         <a href="../citation.html">Cite</a>
-        | <a href="mailto:team@carpentries.org">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+        | <a href="mailto:ilindsay@purdue.edu">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 		</div>
 		<div class="col-md-6">
 
@@ -385,15 +555,15 @@ View”</p>
     {
   "@context": "https://schema.org",
   "@type": "LearningResource",
-  "@id": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
+  "@id": "https://SpatialTurn.github.io/Foundations/instructor/instructor-notes.html",
   "inLanguage": "en",
   "dct:conformsTo": "https://bioschemas.org/profiles/LearningResource/1.0-RELEASE",
   "description": "A Carpentries Lesson teaching foundational data and coding skills to researchers worldwide",
-  "keywords": "software, data, lesson, The Carpentries",
+  "keywords": "Python, Jupyter, Google Colab, pandas, matplotlib, GeoPandas, coordinate reference systems, spatial join, QGIS, beginners, social science",
   "name": "Instructor Notes",
   "creativeWorkStatus": "active",
-  "url": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
-  "identifier": "https://carpentries.github.io/workbench-template-md/instructor/instructor-notes.html",
+  "url": "https://SpatialTurn.github.io/Foundations/instructor/instructor-notes.html",
+  "identifier": "https://SpatialTurn.github.io/Foundations/instructor/instructor-notes.html",
   "dateCreated": "2026-10-17",
   "dateModified": "2026-10-17",
   "datePublished": "2026-10-17"
