@@ -25,7 +25,7 @@ title: 'Foundations: Python and QGIS for Geospatial Work'
 created: '2026-10-17'
 
 # Comma-separated list of keywords for the lesson
-keywords: 'Python, Jupyter, Google Colab, pandas, matplotlib, GeoPandas, coordinate reference systems, spatial join, QGIS, beginners, social science'
+keywords: 'Python, Jupyter, Google Colab, pandas, matplotlib, GeoPandas, coordinate reference systems, spatial join, rasterio, raster data, QGIS, table join, field calculator, choropleth map, Census data, beginners, social science'
 
 # Life cycle stage of the lesson
 # refer to <https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html> for details
