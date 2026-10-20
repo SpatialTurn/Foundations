@@ -78,8 +78,11 @@ page explains how to install Python with Anaconda.
 |---|---|---|
 | Python Basics | Running cells, variables, text, lists, dictionaries, decisions, loops and functions | 2a to 2f |
 | Working with Data | Tables with pandas and charts with matplotlib | 3a and 3b |
-| Geospatial Python Basics | Map layers with GeoPandas, coordinate reference systems, and joining data | 4a to 4c |
+| Geospatial Python Basics | Map layers with GeoPandas, coordinate reference systems, joining data, and rasters | 4a to 4d |
+| Map Your County in Python | Capstone: a Census table to a finished map | 5a |
 | Getting Started with QGIS | Loading data from the web, styling layers and making a finished map layout | none (QGIS) |
+| Tables, Joins and Selections in QGIS | Joining Census tables, calculating rates and selecting features | none (QGIS) |
+| Map Your County in QGIS | Capstone: the same map, made in QGIS | none (QGIS) |
 
 ## Where to go next
 
@@ -89,8 +92,8 @@ After this module, the curriculum follows the life of a research dataset:
    systems and planning
 2. [Data Collection](https://spatialturn.github.io/DataCollection/): repositories, census data,
    geocoding, imagery and field data
-3. [Data Analysis](https://spatialturn.github.io/DataAnalysis/): network analysis, spatial
-   autocorrelation, clustering and NDVI
+3. [Data Analysis](https://spatialturn.github.io/DataAnalysis/): geoprocessing (buffers, overlays and
+   distances, in QGIS and Python), then network analysis, spatial autocorrelation, clustering and NDVI
 4. [Data Visualization](https://spatialturn.github.io/DataVisualization/): charts, map design and
    accessibility
 5. [Data Curation](https://spatialturn.github.io/DataCuration/): metadata, documentation, preservation
