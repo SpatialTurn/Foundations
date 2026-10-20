@@ -292,7 +292,43 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="qgisintro.html">5. Getting Started with QGIS: Your First Map</a>
+        <a href="map-your-county-python.html">5. Map Your County in Python</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="qgisintro.html">6. Getting Started with QGIS: Your First Map</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="qgis-tables.html">7. Tables, Joins and Selections in QGIS</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="map-your-county-qgis.html">8. Map Your County in QGIS</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -420,11 +456,25 @@ projected CRS in meters before measuring, and <code>set_crs()</code>
 only to label missing CRS information</li>
 <li>Attribute joins match IDs (make them the same type first); spatial
 joins match locations (same CRS first)</li>
+<li>A raster is a grid of cells with a CRS, a cell size and a no-data
+value; rasterio reads it into a NumPy array</li>
+</ul></section><section id="map-your-county-python"><h2 class="section-heading"><a href="map-your-county-python.html">Map Your County in Python</a></h2>
+<hr class="half-width">
+<ul>
+<li>Join, then check: row counts and unmatched rows</li>
+<li>Clean special codes and zero denominators before computing
+rates</li>
+<li>Project to meters, pick classes that suit the distribution, and show
+missing data clearly</li>
+<li>A finished map has a title, legend with units, scale bar, north
+arrow and source line</li>
 </ul></section><section id="qgisintro"><h2 class="section-heading"><a href="qgisintro.html">Getting Started with QGIS: Your First Map</a></h2>
 <hr class="half-width">
 <ul>
-<li>Add Vector Layer with the HTTP(S) protocol loads data straight from
-a web address.</li>
+<li>Add Vector Layer with the HTTP(S) protocol (Type HTTP/HTTPS/FTP)
+loads data straight from a web address.</li>
+<li>Use the Check lines: Zoom to Layer and layer order solve most
+“missing data” problems.</li>
 <li>The attribute table holds the data behind every styling choice.</li>
 <li>Use Categorized for categories and Graduated for numbers, and
 compare classification modes.</li>
@@ -433,6 +483,29 @@ north arrow and source.</li>
 <li>Save the project often; export layouts as PNG or PDF.</li>
 <li>Check layer and project coordinate systems before measuring
 anything.</li>
+</ul></section><section id="qgis-tables"><h2 class="section-heading"><a href="qgis-tables.html">Tables, Joins and Selections in QGIS</a></h2>
+<hr class="half-width">
+<ul>
+<li>A table join attaches a table to features by a shared ID; check that
+ID fields have the same type first</li>
+<li>Census GEOIDs are codes: store them as text so leading zeros
+survive</li>
+<li>After a join, select <code>"field" IS NULL</code> to find unmatched
+features</li>
+<li>Rates need the right denominator; division by zero gives NULL, and
+Census codes such as -666666666 must be replaced with NULL</li>
+<li>Selection highlights features, Filter hides the others, and Save
+Features As makes joins and virtual fields permanent</li>
+</ul></section><section id="map-your-county-qgis"><h2 class="section-heading"><a href="map-your-county-qgis.html">Map Your County in QGIS</a></h2>
+<hr class="half-width">
+<ul>
+<li>Join, then check for unmatched features</li>
+<li>Clean special codes and zero denominators before computing
+rates</li>
+<li>Pick classes that suit the distribution, and show missing data as
+its own class</li>
+<li>A finished map has a title, legend with units, scale bar, north
+arrow and source line</li>
 </ul></section>
 </div>
     </main>

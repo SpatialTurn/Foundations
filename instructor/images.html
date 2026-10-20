@@ -293,7 +293,43 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="qgisintro.html">5. Getting Started with QGIS: Your First Map</a>
+        <a href="map-your-county-python.html">5. Map Your County in Python</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="qgisintro.html">6. Getting Started with QGIS: Your First Map</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="qgis-tables.html">7. Tables, Joins and Selections in QGIS</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="map-your-county-qgis.html">8. Map Your County in QGIS</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -380,22 +416,41 @@
 <hr class="half-width"></section><section id="python-basics"><h2 class="section-heading"><a href="python-basics.html">Python Basics</a></h2>
 <hr class="half-width"></section><section id="working-with-data"><h2 class="section-heading"><a href="working-with-data.html">Working with Data</a></h2>
 <hr class="half-width"></section><section id="geospatial-python"><h2 class="section-heading"><a href="geospatial-python.html">Geospatial Python Basics</a></h2>
+<hr class="half-width"></section><section id="map-your-county-python"><h2 class="section-heading"><a href="map-your-county-python.html">Map Your County in Python</a></h2>
 <hr class="half-width"></section><section id="qgisintro"><h2 class="section-heading"><a href="qgisintro.html">Getting Started with QGIS: Your First Map</a></h2>
 <hr class="half-width">
 <h3 id="qgisintro-figure-1">Figure 1</h3>
-<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Layer Properties dialog for the airports layer on the Symbology tab. Single Symbol is selected at the top, the marker is an airplane SVG symbol called topo airport, color is black, opacity 100 percent and size 5 millimeters. The symbol library below shows topo airport, topo camp, topo hospital and topo pop capital.’</p>
-<figure><img src="../symbology.png" alt="Screenshot of the QGIS Layer Properties dialog for the airports layer on the Symbology tab. Single Symbol is selected at the top, the marker is an airplane SVG symbol called topo airport, color is black, opacity 100 percent and size 5 millimeters. The symbol library below shows topo airport, topo camp, topo hospital and topo pop capital." class="figure mx-auto d-block"><div class="figcaption">Layer Properties, Symbology tab, with the topo
-airport marker selected</div>
+<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Data Source Manager on the Vector page. Source Type is set to Protocol: HTTP(S), cloud, etc. Under Protocol, Type is HTTP/HTTPS/FTP and the URI box holds the web address of indiana_colleges.geojson on raw.githubusercontent.com. Authentication is left at No Authentication. The Add button is at the bottom right.’</p>
+<figure><img src="../fd_qgis_add_layer.png" alt="Screenshot of the QGIS Data Source Manager on the Vector page. Source Type is set to Protocol: HTTP(S), cloud, etc. Under Protocol, Type is HTTP/HTTPS/FTP and the URI box holds the web address of indiana_colleges.geojson on raw.githubusercontent.com. Authentication is left at No Authentication. The Add button is at the bottom right." class="figure mx-auto d-block"><div class="figcaption">The Data Source Manager set up to load a layer
+from a web address.</div>
 </figure><hr>
 <h3 id="qgisintro-figure-2">Figure 2</h3>
-<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Print Layout window titled Airports in Alaska. The Add Item menu is open, listing Add Map, Add 3D Map, Add Picture, Add Label, Add Dynamic Text, Add Legend, Add Scale Bar, Add North Arrow, Add Shape and other items. The page shows a map frame containing Alaska with airport symbols over an OpenStreetMap basemap.’</p>
-<figure><img src="../additemmap.png" alt="Screenshot of the QGIS Print Layout window titled Airports in Alaska. The Add Item menu is open, listing Add Map, Add 3D Map, Add Picture, Add Label, Add Dynamic Text, Add Legend, Add Scale Bar, Add North Arrow, Add Shape and other items. The page shows a map frame containing Alaska with airport symbols over an OpenStreetMap basemap." class="figure mx-auto d-block"><div class="figcaption">Print Layout with the Add Item menu open</div>
+<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Layer Properties dialog for the colleges layer on the Symbology tab. The renderer at the top is Categorized and Value is control. The list of classes shows three symbols and values: Public in green, Private nonprofit in purple and Private for-profit in orange, each with a matching legend label. Below the list are the Classify, plus, minus, Delete All and Delete Unused buttons, and OK, Cancel, Apply and Help at the bottom.’</p>
+<figure><img src="../fd_qgis_categorized.png" alt="Screenshot of the QGIS Layer Properties dialog for the colleges layer on the Symbology tab. The renderer at the top is Categorized and Value is control. The list of classes shows three symbols and values: Public in green, Private nonprofit in purple and Private for-profit in orange, each with a matching legend label. Below the list are the Classify, plus, minus, Delete All and Delete Unused buttons, and OK, Cancel, Apply and Help at the bottom." class="figure mx-auto d-block"><div class="figcaption">Layer Properties, Symbology tab, with
+Categorized symbology on the control field.</div>
 </figure><hr>
 <h3 id="qgisintro-figure-3">Figure 3</h3>
-<p aria-hidden="true">Image 1 of 1: ‘A finished QGIS map titled Airports in Alaska, USA. Black airplane symbols mark 76 airports across Alaska over an OpenStreetMap basemap that also shows western Canada. A legend lists Alaska Airports and OpenStreetMap, with a north arrow and a scale bar from 0 to 500 kilometers. Author and date appear below the map.’</p>
-<figure><img src="../airportmap.png" alt="A finished QGIS map titled Airports in Alaska, USA. Black airplane symbols mark 76 airports across Alaska over an OpenStreetMap basemap that also shows western Canada. A legend lists Alaska Airports and OpenStreetMap, with a north arrow and a scale bar from 0 to 500 kilometers. Author and date appear below the map." class="figure mx-auto d-block"><div class="figcaption">An example finished layout: airports in
-Alaska</div>
-</figure><hr></section>
+<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Print Layout window. The toolbar on the left has the tools for adding items (map, picture, label, legend, scale bar, north arrow, shapes and more). The A4 page in the middle holds a title, a map of Indiana counties with colleges shown as colored dots, a north arrow at the top left of the map, a legend titled Colleges by control at the lower right, a scale bar from 0 to 100 km at the lower left and a source line under the map. The Items panel on the right lists the six items: the source label, the picture (north arrow), the scale bar, the legend, the title label and Map 1.’</p>
+<figure><img src="../fd_qgis_layout.png" alt="Screenshot of the QGIS Print Layout window. The toolbar on the left has the tools for adding items (map, picture, label, legend, scale bar, north arrow, shapes and more). The A4 page in the middle holds a title, a map of Indiana counties with colleges shown as colored dots, a north arrow at the top left of the map, a legend titled Colleges by control at the lower right, a scale bar from 0 to 100 km at the lower left and a source line under the map. The Items panel on the right lists the six items: the source label, the picture (north arrow), the scale bar, the legend, the title label and Map 1." class="figure mx-auto d-block"><div class="figcaption">The Print Layout window with a finished
+page.</div>
+</figure><hr>
+<h3 id="qgisintro-figure-4">Figure 4</h3>
+<p aria-hidden="true">Image 1 of 1: ‘A finished QGIS map titled Colleges and universities in Indiana, by control. Indiana's 92 counties are drawn in pale gray with thin outlines, and colleges are colored dots: green for Public, purple for Private nonprofit and orange for Private for-profit. The dots cluster around Indianapolis, Fort Wayne, South Bend and the Chicago suburbs in the northwest. A legend at the lower right lists the three types, a scale bar from 0 to 100 km sits at the lower left, a north arrow at the upper left, and a source line under the map credits NCES IPEDS 2023 and the U.S. Census Bureau.’</p>
+<figure><img src="../fd_qgis_final_map.png" alt="A finished QGIS map titled Colleges and universities in Indiana, by control. Indiana's 92 counties are drawn in pale gray with thin outlines, and colleges are colored dots: green for Public, purple for Private nonprofit and orange for Private for-profit. The dots cluster around Indianapolis, Fort Wayne, South Bend and the Chicago suburbs in the northwest. A legend at the lower right lists the three types, a scale bar from 0 to 100 km sits at the lower left, a north arrow at the upper left, and a source line under the map credits NCES IPEDS 2023 and the U.S. Census Bureau." class="figure mx-auto d-block"><div class="figcaption">An example finished layout: colleges and
+universities in Indiana.</div>
+</figure><hr></section><section id="qgis-tables"><h2 class="section-heading"><a href="qgis-tables.html">Tables, Joins and Selections in QGIS</a></h2>
+<hr class="half-width">
+<h3 id="qgis-tables-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Layer Properties dialog on the Joins tab. One join is listed and expanded: Join layer tippecanoe_acs_2024, Join field GEOID, Target field GEOID, Cache join layer in virtual memory ticked, Custom field name prefix acs_, Joined fields all. The add, remove and edit buttons are at the bottom left.’</p>
+<figure><img src="../fd_qgis_joins.png" alt="Screenshot of the QGIS Layer Properties dialog on the Joins tab. One join is listed and expanded: Join layer tippecanoe_acs_2024, Join field GEOID, Target field GEOID, Cache join layer in virtual memory ticked, Custom field name prefix acs_, Joined fields all. The add, remove and edit buttons are at the bottom left." class="figure mx-auto d-block"><div class="figcaption">The Joins tab of the tracts layer’s properties,
+with the join to the ACS table.</div>
+</figure><hr>
+<h3 id="qgis-tables-figure-2">Figure 2</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Screenshot of the QGIS Field Calculator for the tracts layer. Create virtual field is ticked and grayed out. Output field name is pct_no_vehicle and Output field type is Decimal (double). The expression reads acs_hh_no_vehicle divided by acs_households times 100, and the preview for Census Tract 1 is 15.31. A note at the bottom says the layer does not support adding new provider fields, so only virtual fields can be added.’</p>
+<figure><img src="../fd_qgis_virtual_field.png" alt="Screenshot of the QGIS Field Calculator for the tracts layer. Create virtual field is ticked and grayed out. Output field name is pct_no_vehicle and Output field type is Decimal (double). The expression reads acs_hh_no_vehicle divided by acs_households times 100, and the preview for Census Tract 1 is 15.31. A note at the bottom says the layer does not support adding new provider fields, so only virtual fields can be added." class="figure mx-auto d-block"><div class="figcaption">The Field Calculator creating a virtual
+field.</div>
+</figure><hr></section><section id="map-your-county-qgis"><h2 class="section-heading"><a href="map-your-county-qgis.html">Map Your County in QGIS</a></h2>
+<hr class="half-width"></section>
 </div>
     </main>
 </div>

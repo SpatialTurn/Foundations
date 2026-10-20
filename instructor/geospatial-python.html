@@ -123,7 +123,7 @@
     <a id="search-button-nav" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 54%" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">54%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 36%" aria-valuenow="36" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">36%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -248,6 +248,7 @@
         <ul><li><a href="#vector-data-and-geodataframes">Vector data and GeoDataFrames</a></li>
 <li><a href="#coordinate-reference-systems">Coordinate reference systems</a></li>
 <li><a href="#joining-data">Joining data</a></li>
+<li><a href="#raster-data">Raster data</a></li>
 <li><a href="#notebooks">Notebooks</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
@@ -258,7 +259,34 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="qgisintro.html">5. Getting Started with QGIS: Your First Map</a>
+        <a href="map-your-county-python.html">5. Map Your County in Python</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="qgisintro.html">6. Getting Started with QGIS: Your First Map</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="qgis-tables.html">7. Tables, Joins and Selections in QGIS</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="map-your-county-qgis.html">8. Map Your County in QGIS</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -321,7 +349,7 @@
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter Top"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/working-with-data.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/qgisintro.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/map-your-county-python.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -329,20 +357,20 @@
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Working with Data...
         </a>
-        <a class="chapter-link float-end" href="../instructor/qgisintro.html" rel="next">
-          Next: Getting Started with QGIS: Your First...
+        <a class="chapter-link float-end" href="../instructor/map-your-county-python.html" rel="next">
+          Next: Map Your County in Python...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Geospatial Python Basics</h1>
-        <p>Last updated on 2026-10-17 |
+        <p>Last updated on 2026-10-20 |
 
         <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/geospatial-python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
 
 
-        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 105 minutes</p>
+        <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 135 minutes</p>
 
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -362,6 +390,8 @@
 measuring?</li>
 <li>How do I combine a table with a map layer, or two layers with each
 other?</li>
+<li>How is raster data different from vector data, and how do I read
+it?</li>
 </ul></div>
 </div>
 </div>
@@ -375,6 +405,8 @@ it</li>
 system</li>
 <li>Measure areas and distances in meters</li>
 <li>Combine data with attribute joins and spatial joins</li>
+<li>Read a raster with rasterio, summarize its cells and clip it to a
+polygon</li>
 </ul></div>
 </div>
 </div>
@@ -447,6 +479,48 @@ in one table and a number in the other. Convert both to text (and pad
 with <code>zfill()</code> to the right length) before joining, and
 always compare the row counts before and after. A spatial join needs
 both layers in the same CRS.</p>
+</section><section><h2 class="section-heading" id="raster-data">Raster data<a class="anchor" aria-label="anchor" href="#raster-data"></a></h2>
+<hr class="half-width"><p>A <strong>raster</strong> covers an area with a grid of equal cells,
+each holding one number: an elevation, a temperature, a satellite
+reflectance, or a class code such as “forest”. Rasters suit things that
+vary continuously across space, while vector data suits discrete
+features.</p>
+<table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr><th></th>
+<th>Vector</th>
+<th>Raster</th>
+</tr></thead><tbody><tr><td>Stores</td>
+<td>Features with shapes and attributes</td>
+<td>A grid of cells, one value per cell per band</td>
+</tr><tr><td>Detail set by</td>
+<td>The accuracy of the shapes</td>
+<td>The <strong>cell size</strong> (resolution), for example 30 m</td>
+</tr><tr><td>Typical files</td>
+<td>GeoJSON, shapefile, GeoPackage</td>
+<td>GeoTIFF</td>
+</tr><tr><td>Python library</td>
+<td>GeoPandas</td>
+<td>
+<strong>rasterio</strong> (with NumPy)</td>
+</tr></tbody></table><p>Every raster also has a CRS, an extent and a <strong>no-data
+value</strong> that marks cells with no measurement. Read the cells with
+<code>masked=True</code> so that value does not distort your
+statistics.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> rasterio</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a>dem <span class="op">=</span> rasterio.<span class="bu">open</span>(<span class="st">"https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_dem.tif"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="bu">print</span>(dem.crs, dem.res, dem.nodata)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a>elev <span class="op">=</span> dem.read(<span class="dv">1</span>, masked<span class="op">=</span><span class="va">True</span>)      <span class="co"># a NumPy array of elevations in meters</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="bu">print</span>(elev.<span class="bu">min</span>(), elev.<span class="bu">max</span>())</span></code></pre>
+</div>
+<p>Some rasters hold <strong>measurements</strong> (elevation,
+temperature): averages and histograms make sense. Others are
+<strong>categorical</strong> (land cover codes): count the cells of each
+class instead, because the average of “forest” and “water” means
+nothing. The Data Management module’s <a href="https://spatialturn.github.io/DataManagement/data-models.html" class="external-link">Geospatial
+Data Models</a> episode compares the two data models in more depth.</p>
 <div id="challenge-1-set_crs-or-to_crs" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -469,7 +543,7 @@ draw them together.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal"><li>
 <code>set_crs(epsg=4326)</code>: the CRS is missing and you know
@@ -503,7 +577,7 @@ What would you check first?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Check the type and format of <code>GEOID</code> in both tables. A
 common cause is that one table stores it as text
@@ -515,6 +589,45 @@ California tract <code>"06001400100"</code> read as the number
 join again. Also check that both tables cover the same year, because
 tract boundaries change between censuses.</p>
 </div>
+</div>
+</div>
+</div>
+<div id="challenge-3-vector-or-raster" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-3-vector-or-raster" class="callout-inner">
+<h3 class="callout-title">Challenge 3: Vector or raster?</h3>
+<div class="callout-content">
+<p>Which data model would you choose for each, and why?</p>
+<ol style="list-style-type: decimal"><li>The locations of 17 supermarkets</li>
+<li>Air temperature across Indiana at 2 p.m.</li>
+<li>Land cover (forest, crops, water, developed) for a county</li>
+<li>Census tract boundaries with their population</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li>
+<strong>Vector</strong> (points): a few discrete features with
+attributes such as a name.</li>
+<li>
+<strong>Raster</strong>: temperature varies continuously, so a grid
+of values fits.</li>
+<li>Usually <strong>raster</strong> (as in the NLCD land cover in
+notebook 4d), because satellites classify every cell. It can be
+converted to polygons, but the files grow large.</li>
+<li>
+<strong>Vector</strong> (polygons): tracts are discrete areas with
+attributes.</li>
+</ol></div>
 </div>
 </div>
 </div>
@@ -532,6 +645,8 @@ projected CRS in meters before measuring, and <code>set_crs()</code>
 only to label missing CRS information</li>
 <li>Attribute joins match IDs (make them the same type first); spatial
 joins match locations (same CRS first)</li>
+<li>A raster is a grid of cells with a CRS, a cell size and a no-data
+value; rasterio reads it into a NumPy array</li>
 </ul></div>
 </div>
 </div>
@@ -550,13 +665,17 @@ what a wrong CRS label does</td>
 Joining Tables and Layers</a></td>
 <td>Fix a failing FIPS join, then find which stores lie inside the city
 limits</td>
+</tr><tr><td><a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/04d_Raster_Data_with_rasterio.ipynb" target="_blank" class="external-link">4d.
+Raster Data with rasterio</a></td>
+<td>Read Tippecanoe County elevation and land cover, look up values at
+points, and clip land cover to the cities</td>
 </tr></tbody></table><!--
 Links listed here can be reused across pages as [text][name].
 Add reference-style links below as needed.
 --></section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/working-with-data.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/qgisintro.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/map-your-county-python.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
@@ -564,8 +683,8 @@ Add reference-style links below as needed.
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
           Previous: Working with Data...
         </a>
-        <a class="chapter-link float-end" href="../instructor/qgisintro.html" rel="next">
-          Next: Getting Started with QGIS: Your First...
+        <a class="chapter-link float-end" href="../instructor/map-your-county-python.html" rel="next">
+          Next: Map Your County in Python...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -613,7 +732,7 @@ Add reference-style links below as needed.
   "url": "https://SpatialTurn.github.io/Foundations/instructor/geospatial-python.html",
   "identifier": "https://SpatialTurn.github.io/Foundations/instructor/geospatial-python.html",
   "dateCreated": "2026-10-17",
-  "dateModified": "2026-10-17",
+  "dateModified": "2026-10-20",
   "datePublished": "2026-10-20"
 }
 

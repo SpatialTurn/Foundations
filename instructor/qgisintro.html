@@ -123,7 +123,7 @@
     <a id="search-button-nav" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 77%" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">77%</div>
+    <div class="progress-bar incubator" role="progressbar" style="width: 64%" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="Lesson Progress">64%</div>
   </div>
 </aside><div class="container">
       <div class="row">
@@ -241,13 +241,22 @@
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="map-your-county-python.html">5. Map Your County in Python</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        5. Getting Started with QGIS: Your First Map
+        6. Getting Started with QGIS: Your First Map
         </span>
       </button>
     </div><!--/div.accordion-header-->
@@ -267,6 +276,24 @@
 <li><a href="#final-takeaways">Final takeaways</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="qgis-tables.html">7. Tables, Joins and Selections in QGIS</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="map-your-county-qgis.html">8. Map Your County in QGIS</a>
+    </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -327,23 +354,23 @@
         <!-- START: inst/pkgdown/templates/content-instructor.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Previous and Next Chapter Top"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="../instructor/geospatial-python.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="../instructor/map-your-county-python.html" rel="prev"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="../instructor/qgis-tables.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="../instructor/geospatial-python.html" rel="prev">
+        <a class="chapter-link" href="../instructor/map-your-county-python.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Geospatial Python Basics...
+          Previous: Map Your County in Python...
         </a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="../instructor/qgis-tables.html" rel="next">
+          Next: Tables, Joins and Selections in QGIS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Getting Started with QGIS: Your First Map</h1>
-        <p>Last updated on 2026-10-17 |
+        <p>Last updated on 2026-10-20 |
 
         <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/qgisintro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -392,52 +419,63 @@ source, and export it</li>
 <section><h2 class="section-heading" id="before-you-start">Before you start<a class="anchor" aria-label="anchor" href="#before-you-start"></a></h2>
 <hr class="half-width"><p>You need QGIS installed. If you have not installed it yet, or the
 interface is new to you, follow the <a href="index.html#setup">Setup page</a>
-first. These steps were written for the QGIS 3.x Long Term Release;
-menus may differ slightly in other versions.</p>
+first. These steps were checked in <strong>QGIS 4.0</strong>; QGIS 3.34
+and later look almost the same, and differences are noted where they
+matter.</p>
 <p>We will use two small datasets hosted with this lesson. <strong>You
 do not need to download anything:</strong> QGIS can read a file directly
 from its web address.</p>
 <table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr><th>Dataset</th>
 <th>Web address</th>
 <th>Contents</th>
-</tr></thead><tbody><tr><td>Alaska airports (points)</td>
-<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/alaska_airports.geojson</code></td>
-<td>76 airports with <code>name</code>, <code>use</code> (civilian,
-military and so on) and <code>elevation</code>. From the QGIS sample
-dataset.</td>
+</tr></thead><tbody><tr><td>Indiana colleges (points)</td>
+<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_colleges.geojson</code></td>
+<td>70 degree-granting colleges and universities with <code>name</code>,
+<code>city</code>, <code>control</code> (Public, Private nonprofit,
+Private for-profit) and <code>level</code> (4-year or 2-year). From the
+National Center for Education Statistics (IPEDS, 2023).</td>
 </tr><tr><td>Indiana counties (polygons)</td>
 <td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_counties.geojson</code></td>
 <td>92 counties with <code>pop_2012</code>, <code>land_sq_mi</code>,
 <code>density</code> (people per square mile) and
 <code>unemp_2016</code> (percent)</td>
-</tr></tbody></table><hr></section><section><h2 class="section-heading" id="part-1-add-a-basemap">Part 1: Add a basemap<a class="anchor" aria-label="anchor" href="#part-1-add-a-basemap"></a></h2>
+</tr></tbody></table><p>Each part below ends with a <strong>Check</strong> line that says
+what you should see. If your screen does not match, fix that part before
+moving on; most problems later come from a step that went wrong
+earlier.</p>
+<hr></section><section><h2 class="section-heading" id="part-1-add-a-basemap">Part 1: Add a basemap<a class="anchor" aria-label="anchor" href="#part-1-add-a-basemap"></a></h2>
 <hr class="half-width"><p>A basemap gives your data geographic context.</p>
 <ol style="list-style-type: decimal"><li>In the <strong>Browser</strong> panel (usually on the left), expand
-<strong>XYZ Tiles</strong>.</li>
+<strong>XYZ Tiles</strong>. If you do not see the Browser panel, open it
+with <strong>View &gt; Panels &gt; Browser</strong>.</li>
 <li>Right-click <strong>OpenStreetMap</strong> and choose <strong>Add
 Layer to Project</strong>.</li>
-<li>A world map appears in the map canvas.</li>
-</ol><p>If you do not see the Browser panel, open it with <strong>View &gt;
-Panels &gt; Browser</strong>.</p>
+</ol><p><strong>Check:</strong> a world map fills the map canvas, and
+<code>OpenStreetMap</code> is listed in the <strong>Layers</strong>
+panel.</p>
 <hr></section><section><h2 class="section-heading" id="part-2-load-a-layer-from-the-web">Part 2: Load a layer from the web<a class="anchor" aria-label="anchor" href="#part-2-load-a-layer-from-the-web"></a></h2>
 <hr class="half-width"><ol style="list-style-type: decimal"><li>Go to <strong>Layer &gt; Add Layer &gt; Add Vector
 Layer</strong>.</li>
 <li>Under <strong>Source Type</strong>, choose <strong>Protocol:
 HTTP(S), cloud, etc.</strong>
 </li>
-<li>Leave <strong>Type</strong> as <strong>HTTP/HTTPS/FTP</strong>.</li>
-<li>In <strong>URI</strong>, paste the airports web address from the
+<li>Set <strong>Type</strong> to <strong>HTTP/HTTPS/FTP</strong>. (In
+QGIS 4 this list starts with cloud storage services, so check it; in
+QGIS 3 it is already selected.)</li>
+<li>In <strong>URI</strong>, paste the colleges web address from the
 table above.</li>
 <li>Click <strong>Add</strong>, then <strong>Close</strong>.</li>
-</ol><p>The 76 airports appear as points over Alaska, and a layer called
-<code>alaska_airports</code> appears in the <strong>Layers</strong>
-panel.</p>
-<ol start="6" style="list-style-type: decimal"><li>If the points are hidden under the basemap, drag
-<code>alaska_airports</code> above <code>OpenStreetMap</code> in the
+</ol><figure><img src="../fd_qgis_add_layer.png" alt="Screenshot of the QGIS Data Source Manager on the Vector page. Source Type is set to Protocol: HTTP(S), cloud, etc. Under Protocol, Type is HTTP/HTTPS/FTP and the URI box holds the web address of indiana_colleges.geojson on raw.githubusercontent.com. Authentication is left at No Authentication. The Add button is at the bottom right." class="figure mx-auto d-block"><div class="figcaption">The Data Source Manager set up to load a layer
+from a web address.</div>
+</figure><ol start="6" style="list-style-type: decimal"><li>If the points are hidden under the basemap, drag
+<code>indiana_colleges</code> above <code>OpenStreetMap</code> in the
 Layers panel. Layers at the top of the list are drawn on top.</li>
-<li>Right-click the airports layer and choose <strong>Zoom to
+<li>Right-click the colleges layer and choose <strong>Zoom to
 Layer</strong>.</li>
-</ol><div id="loading-local-files" class="callout">
+</ol><p><strong>Check:</strong> about 70 points over Indiana, with clusters
+around Indianapolis, Fort Wayne and the Chicago suburbs in the
+northwest.</p>
+<div id="loading-local-files" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
@@ -449,56 +487,57 @@ Layer</strong>.</li>
 Type</strong> as <strong>File</strong> and browse to it. For a
 shapefile, select the <code>.shp</code> file; the <code>.dbf</code>,
 <code>.shx</code>, <code>.prj</code> and <code>.cpg</code> files with
-the same name must be in the same folder.</p>
+the same name must be in the same folder. A zipped shapefile can be
+added directly, without unzipping.</p>
 </div>
 </div>
 </div>
 <p>Save your project now (<strong>Project &gt; Save</strong>, which
 creates a <code>.qgz</code> file) and save regularly as you work.</p>
 <hr></section><section><h2 class="section-heading" id="part-3-explore-the-attributes">Part 3: Explore the attributes<a class="anchor" aria-label="anchor" href="#part-3-explore-the-attributes"></a></h2>
-<hr class="half-width"><ol style="list-style-type: decimal"><li>Right-click the airports layer and choose <strong>Open Attribute
+<hr class="half-width"><ol style="list-style-type: decimal"><li>Right-click the colleges layer and choose <strong>Open Attribute
 Table</strong>.</li>
-<li>You should see <strong>76 rows</strong>, one per airport, with the
-columns <code>name</code>, <code>use</code> and
-<code>elevation</code>.</li>
-<li>Click the <code>use</code> column header to sort it. How many
-airports are military?</li>
-</ol><p>The attribute table holds the data behind the map. Every styling
-choice you make next is based on one of these columns.</p>
-<p>You can also click a single airport with the <strong>Identify
-Features</strong> tool (the “i” icon on the toolbar) to see its
-attributes.</p>
+<li>Click the <code>control</code> column header to sort it.</li>
+<li>Click the <strong>Identify Features</strong> tool (the “i” icon on
+the toolbar), then click one point on the map to see its attributes in a
+panel.</li>
+</ol><p><strong>Check:</strong> the table has <strong>70 rows</strong>, one
+per college, and the columns <code>name</code>, <code>city</code>,
+<code>control</code>, <code>level</code> and <code>unitid</code> (the
+federal ID). 16 colleges are Public, 42 Private nonprofit and 12 Private
+for-profit.</p>
+<p>The attribute table holds the data behind the map. Every styling
+choice you make next is based on one of these columns. Look up Purdue:
+why might “Purdue University Global”, an online university, appear in
+West Lafayette? (Its official address is there; locations in a dataset
+are not always where the activity happens.)</p>
 <hr></section><section><h2 class="section-heading" id="part-4-style-the-points">Part 4: Style the points<a class="anchor" aria-label="anchor" href="#part-4-style-the-points"></a></h2>
-<hr class="half-width"><p>First, give the airports a clearer symbol than the default dot.</p>
-<ol style="list-style-type: decimal"><li>Right-click the airports layer and choose
+<hr class="half-width"><p>Color the colleges by who runs them:</p>
+<ol style="list-style-type: decimal"><li>Right-click the colleges layer and choose
 <strong>Properties</strong>, then the <strong>Symbology</strong>
 tab.</li>
-<li>With <strong>Single Symbol</strong> selected at the top, scroll the
-symbol library at the bottom and choose a marker such as <strong>topo
-airport</strong>. Set the <strong>Size</strong> to about 5
-millimeters.</li>
-<li>Click <strong>Apply</strong>.</li>
-</ol><figure><img src="../symbology.png" alt="Screenshot of the QGIS Layer Properties dialog for the airports layer on the Symbology tab. Single Symbol is selected at the top, the marker is an airplane SVG symbol called topo airport, color is black, opacity 100 percent and size 5 millimeters. The symbol library below shows topo airport, topo camp, topo hospital and topo pop capital." class="figure mx-auto d-block"><div class="figcaption">Layer Properties, Symbology tab, with the topo
-airport marker selected</div>
-</figure><p>Now color the airports by how they are used:</p>
-<ol start="4" style="list-style-type: decimal"><li>Change <strong>Single Symbol</strong> to
+<li>At the top, change <strong>Single Symbol</strong> to
 <strong>Categorized</strong>.</li>
-<li>Set <strong>Value</strong> to <code>use</code>.</li>
-<li>Click <strong>Classify</strong>. Each airport type gets its own
-color.</li>
+<li>Set <strong>Value</strong> to <code>control</code>.</li>
+<li>Click <strong>Classify</strong>. Each type gets its own color. (QGIS
+also adds an empty “all other values” row; you can leave it.)</li>
 <li>Double-click a symbol to change its color or size. Use clearly
-different colors (or shapes) for the four types.</li>
+different colors, and a size of about 3 millimeters.</li>
 <li>Click <strong>OK</strong>.</li>
-</ol><p>Each renderer is suited to a type of data:</p>
+</ol><figure><img src="../fd_qgis_categorized.png" alt="Screenshot of the QGIS Layer Properties dialog for the colleges layer on the Symbology tab. The renderer at the top is Categorized and Value is control. The list of classes shows three symbols and values: Public in green, Private nonprofit in purple and Private for-profit in orange, each with a matching legend label. Below the list are the Classify, plus, minus, Delete All and Delete Unused buttons, and OK, Cancel, Apply and Help at the bottom." class="figure mx-auto d-block"><div class="figcaption">Layer Properties, Symbology tab, with
+Categorized symbology on the control field.</div>
+</figure><p><strong>Check:</strong> three colors on the map, and three entries
+under the layer in the Layers panel.</p>
+<p>Each renderer is suited to a type of data:</p>
 <table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr><th>Renderer</th>
 <th>Use for</th>
 <th>Example</th>
 </tr></thead><tbody><tr><td><strong>Single Symbol</strong></td>
 <td>Showing where things are</td>
-<td>All airports in one style</td>
+<td>All colleges in one style</td>
 </tr><tr><td><strong>Categorized</strong></td>
 <td>Categories (no order)</td>
-<td>Airport <code>use</code>
+<td>College <code>control</code>
 </td>
 </tr><tr><td><strong>Graduated</strong></td>
 <td>Numbers (low to high)</td>
@@ -506,7 +545,8 @@ different colors (or shapes) for the four types.</li>
 </td>
 </tr></tbody></table><p>To rename the layer, as it will appear in the legend, open
 <strong>Properties &gt; Source</strong> and change the <strong>Layer
-name</strong> (for example, to “Airports by use”).</p>
+name</strong> (for example, to “Colleges by control”), or right-click it
+and choose <strong>Rename Layer</strong>.</p>
 <hr></section><section><h2 class="section-heading" id="part-5-build-a-choropleth-map">Part 5: Build a choropleth map<a class="anchor" aria-label="anchor" href="#part-5-build-a-choropleth-map"></a></h2>
 <hr class="half-width"><p>Now load the Indiana counties and shade them by population
 density.</p>
@@ -529,6 +569,8 @@ fewer than 200 people per square mile, and Marion County (Indianapolis)
 has over 2,000. With Equal Interval, almost every county lands in the
 lightest class. Choose the mode that best shows your message, and click
 <strong>OK</strong>.</p>
+<p><strong>Check:</strong> with Natural Breaks, Marion County is alone
+in the darkest class.</p>
 <div id="why-density-and-not-population" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -546,6 +588,10 @@ of Map Design</a> episode.</p>
 </div>
 </div>
 </div>
+<p>For the layout below, keep the counties as a light, plain background:
+switch their symbology back to <strong>Single Symbol</strong> with a
+pale fill, or untick the choropleth layer and load the counties a second
+time. A map with two strong color schemes is hard to read.</p>
 <hr></section><section><h2 class="section-heading" id="part-6-create-a-map-layout">Part 6: Create a map layout<a class="anchor" aria-label="anchor" href="#part-6-create-a-map-layout"></a></h2>
 <hr class="half-width"><p>To export a finished map with all its elements, use a <strong>Print
 Layout</strong>.</p>
@@ -560,8 +606,9 @@ Label</strong>, drag a box above the map, and type your title in the
 <strong>Item Properties</strong> panel. Make it large.</li>
 <li>
 <strong>Add a legend:</strong> choose <strong>Add Item &gt; Add
-Legend</strong> and drag a box. In Item Properties, you can rename
-entries and remove the basemap from the legend.</li>
+Legend</strong> and drag a box. In Item Properties, untick <strong>Auto
+update</strong>, then remove the basemap from the legend with the minus
+button and rename entries by double-clicking them.</li>
 <li>
 <strong>Add a scale bar:</strong> choose <strong>Add Item &gt; Add
 Scale Bar</strong>. Set the units to miles or kilometers.</li>
@@ -570,25 +617,32 @@ Scale Bar</strong>. Set the units to miles or kilometers.</li>
 North Arrow</strong>.</li>
 <li>
 <strong>Add a source line:</strong> add another label at the bottom
-with the data source and your name, for example “Data: U.S. Census
-Bureau, BLS. Map by A. Student, 2026.”</li>
-</ol><figure><img src="../additemmap.png" alt="Screenshot of the QGIS Print Layout window titled Airports in Alaska. The Add Item menu is open, listing Add Map, Add 3D Map, Add Picture, Add Label, Add Dynamic Text, Add Legend, Add Scale Bar, Add North Arrow, Add Shape and other items. The page shows a map frame containing Alaska with airport symbols over an OpenStreetMap basemap." class="figure mx-auto d-block"><div class="figcaption">Print Layout with the Add Item menu open</div>
-</figure><p>Use <strong>Item Properties</strong> to change fonts, sizes and
+with the data source and your name, for example “Data: NCES IPEDS 2023;
+U.S. Census Bureau. Basemap: OpenStreetMap contributors. Map by A.
+Student, 2026.”</li>
+</ol><p>Use <strong>Item Properties</strong> to change fonts, sizes and
 frames. Use the <strong>Move Item Content</strong> tool to pan the map
 inside its frame without moving the frame.</p>
+<figure><img src="../fd_qgis_layout.png" alt="Screenshot of the QGIS Print Layout window. The toolbar on the left has the tools for adding items (map, picture, label, legend, scale bar, north arrow, shapes and more). The A4 page in the middle holds a title, a map of Indiana counties with colleges shown as colored dots, a north arrow at the top left of the map, a legend titled Colleges by control at the lower right, a scale bar from 0 to 100 km at the lower left and a source line under the map. The Items panel on the right lists the six items: the source label, the picture (north arrow), the scale bar, the legend, the title label and Map 1." class="figure mx-auto d-block"><div class="figcaption">The Print Layout window with a finished
+page.</div>
+</figure><p><strong>Check:</strong> the page shows the map, a title, a legend
+without the basemap, a scale bar, a north arrow and a source line.</p>
 <hr></section><section><h2 class="section-heading" id="part-7-export">Part 7: Export<a class="anchor" aria-label="anchor" href="#part-7-export"></a></h2>
 <hr class="half-width"><ol style="list-style-type: decimal"><li>In the layout window, choose <strong>Layout &gt; Export as
 Image</strong> (PNG) or <strong>Layout &gt; Export as PDF</strong>.</li>
 <li>Choose a file name and location and accept the default options.</li>
 <li>Save the project again (<code>.qgz</code>). The layout is saved
 inside the project.</li>
-</ol><figure><img src="../airportmap.png" alt="A finished QGIS map titled Airports in Alaska, USA. Black airplane symbols mark 76 airports across Alaska over an OpenStreetMap basemap that also shows western Canada. A legend lists Alaska Airports and OpenStreetMap, with a north arrow and a scale bar from 0 to 500 kilometers. Author and date appear below the map." class="figure mx-auto d-block"><div class="figcaption">An example finished layout: airports in
-Alaska</div>
-</figure><p>This example uses a single airport symbol. Your version will also
-show the airport types from Part 4. Notice that it is missing one
-element from our list: a <strong>data source</strong> line.</p>
-<hr></section><section><h2 class="section-heading" id="common-beginner-mistakes">Common beginner mistakes<a class="anchor" aria-label="anchor" href="#common-beginner-mistakes"></a></h2>
+</ol><p>This example uses a plain county background instead of the basemap,
+which often reads better on paper.</p>
+<figure><img src="../fd_qgis_final_map.png" alt="A finished QGIS map titled Colleges and universities in Indiana, by control. Indiana's 92 counties are drawn in pale gray with thin outlines, and colleges are colored dots: green for Public, purple for Private nonprofit and orange for Private for-profit. The dots cluster around Indianapolis, Fort Wayne, South Bend and the Chicago suburbs in the northwest. A legend at the lower right lists the three types, a scale bar from 0 to 100 km sits at the lower left, a north arrow at the upper left, and a source line under the map credits NCES IPEDS 2023 and the U.S. Census Bureau." class="figure mx-auto d-block"><div class="figcaption">An example finished layout: colleges and
+universities in Indiana.</div>
+</figure><hr></section><section><h2 class="section-heading" id="common-beginner-mistakes">Common beginner mistakes<a class="anchor" aria-label="anchor" href="#common-beginner-mistakes"></a></h2>
 <hr class="half-width"><ul><li>Forgetting to save the project</li>
+<li>Loading a web address with the wrong protocol <strong>Type</strong>
+(Part 2): the layer fails to load</li>
+<li>Data loaded but not visible: use <strong>Zoom to Layer</strong> and
+check the layer order</li>
 <li>Mapping counts instead of rates on a choropleth map</li>
 <li>Leaving layer names such as <code>indiana_counties</code> in the
 legend</li>
@@ -659,18 +713,17 @@ writing a conclusion like this.</li>
 </div>
 </div>
 </div>
-<div id="challenge-2-fix-the-projection-optional" class="callout challenge">
+<div id="challenge-2-show-and-label-only-public-universities-optional" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="challenge-2-fix-the-projection-optional" class="callout-inner">
-<h3 class="callout-title">Challenge 2: Fix the projection
-(optional)</h3>
+<div id="challenge-2-show-and-label-only-public-universities-optional" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Show and label only public
+universities (optional)</h3>
 <div class="callout-content">
-<p>Alaska looks stretched over the OpenStreetMap basemap, which uses Web
-Mercator. Change the project’s coordinate reference system to one
-designed for Alaska and compare.</p>
+<p>Make the colleges layer show only <strong>public 4-year</strong>
+institutions, and label them with their names.</p>
 </div>
 </div>
 </div>
@@ -681,13 +734,19 @@ designed for Alaska and compare.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>Click the <strong>EPSG code</strong> in the bottom-right corner of
-the QGIS window (or <strong>Project &gt; Properties &gt; CRS</strong>),
-search for <strong>3338</strong> (NAD83 / Alaska Albers), select it and
-click <strong>OK</strong>. The map is redrawn in an equal area
-projection for Alaska, and the state no longer looks enormously
-stretched. The basemap is reprojected too, although its labels may look
-slightly blurred.</p>
+<ol style="list-style-type: decimal"><li>Right-click the colleges layer and choose <strong>Filter…</strong>.
+Enter the expression
+<code>"control" = 'Public' AND "level" = '4-year or above'</code> and
+click <strong>OK</strong>. The layer now shows only those features (the
+filter icon appears next to its name), and the attribute table lists
+only them.</li>
+<li>Open <strong>Properties &gt; Labels</strong>, choose <strong>Single
+Labels</strong>, set <strong>Value</strong> to <code>name</code>, and
+click <strong>OK</strong>.</li>
+<li>To show everything again, open <strong>Filter…</strong> and clear
+the expression.</li>
+</ol><p>Field names go in double quotes and text values in single quotes;
+mixing them up is the most common expression error.</p>
 </div>
 </div>
 </div>
@@ -711,8 +770,11 @@ reproject layers you will analyze) to a projected system in meters, such
 as <strong>EPSG:26916</strong> (UTM zone 16N) for Indiana.</li>
 <li>If a layer appears in the wrong place, check its CRS before anything
 else.</li>
-</ul><p>Notebook 4b in this module shows the same ideas in Python, and the
-Data Management module’s <a href="https://spatialturn.github.io/DataManagement/crs.html" class="external-link">Coordinate
+</ul><p>Try it: click the EPSG code in the bottom-right corner, search for
+<strong>26916</strong>, and click <strong>OK</strong>. Indiana looks
+slightly narrower and less stretched than on the Web Mercator basemap.
+Notebook 4b in this module shows the same ideas in Python, and the Data
+Management module’s <a href="https://spatialturn.github.io/DataManagement/crs.html" class="external-link">Coordinate
 Reference Systems</a> episode explains the theory.</p>
 </div>
 </div>
@@ -744,8 +806,10 @@ north arrow, source) come together.</li>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>Add Vector Layer with the HTTP(S) protocol loads data straight from
-a web address.</li>
+<ul><li>Add Vector Layer with the HTTP(S) protocol (Type HTTP/HTTPS/FTP)
+loads data straight from a web address.</li>
+<li>Use the Check lines: Zoom to Layer and layer order solve most
+“missing data” problems.</li>
 <li>The attribute table holds the data behind every styling choice.</li>
 <li>Use Categorized for categories and Graduated for numbers, and
 compare classification modes.</li>
@@ -763,17 +827,17 @@ Add reference-style links below as needed.
 -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter Bottom"><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link" href="../instructor/geospatial-python.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
-        <a class="chapter-link float-end" href="../instructor/index.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link" href="../instructor/map-your-county-python.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
+        <a class="chapter-link float-end" href="../instructor/qgis-tables.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link" href="../instructor/geospatial-python.html" rel="prev">
+        <a class="chapter-link" href="../instructor/map-your-county-python.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previous: Geospatial Python Basics...
+          Previous: Map Your County in Python...
         </a>
-        <a class="chapter-link float-end" href="../instructor/index.html" rel="next">
-          Home
+        <a class="chapter-link float-end" href="../instructor/qgis-tables.html" rel="next">
+          Next: Tables, Joins and Selections in QGIS...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -821,7 +885,7 @@ Add reference-style links below as needed.
   "url": "https://SpatialTurn.github.io/Foundations/instructor/qgisintro.html",
   "identifier": "https://SpatialTurn.github.io/Foundations/instructor/qgisintro.html",
   "dateCreated": "2026-10-17",
-  "dateModified": "2026-10-17",
+  "dateModified": "2026-10-20",
   "datePublished": "2026-10-20"
 }
 

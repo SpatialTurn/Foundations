@@ -293,7 +293,43 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="qgisintro.html">5. Getting Started with QGIS: Your First Map</a>
+        <a href="map-your-county-python.html">5. Map Your County in Python</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="qgisintro.html">6. Getting Started with QGIS: Your First Map</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="qgis-tables.html">7. Tables, Joins and Selections in QGIS</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="map-your-county-qgis.html">8. Map Your County in QGIS</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -387,8 +423,9 @@ the end. In a live session, teach the episode page briefly, then let
 learners work through the notebooks while helpers circulate.</li>
 <li>Suggested timing for a full day: Introduction 30 min; Python Basics
 (notebooks 2a to 2f) 2.5 hours; Working with Data (3a, 3b) 1 hour;
-Geospatial Python Basics (4a to 4c) 1.5 hours. Getting Started with QGIS
-(about 1.75 hours) works well as a separate session.</li>
+Geospatial Python Basics (4a to 4d) 2 hours; Map Your County in Python 1
+hour. The QGIS episodes (Getting Started 1.75 hours, Tables 1.25 hours,
+Map Your County 1 hour) work well as a separate day.</li>
 <li>Ask everyone to <strong>Save a copy in Drive</strong> before running
 anything.</li>
 <li>The examples use Indiana counties and Lafayette food stores
@@ -440,14 +477,46 @@ makes the difference between <code>set_crs()</code> and
 before showing the fix.</li>
 <li>58 of the 64 food stores lie inside the city limits; all 17
 supermarkets do.</li>
+<li>4d: the commonest mistake is reading without
+<code>masked=True</code> and reporting -9999 as the lowest elevation.
+Elevation 152.9 to 258.1 m; cultivated crops cover 65% of the
+county.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="map-your-county-python-and-qgis">Map Your County (Python and QGIS)<a class="anchor" aria-label="anchor" href="#map-your-county-python-and-qgis"></a>
+</h3>
+<ul>
+<li>Both capstones use the same files and should produce the same map;
+pair a Python learner with a QGIS learner and compare at the end.</li>
+<li>Expected: 43 tracts, 0 unmatched; tract 104 (residence halls) has 0
+households and a poverty universe of 0, so its rates are missing; median
+income is -666666666 for tracts 104 and 105; 17 tracts have 10% or more
+households without a vehicle. Natural breaks differ slightly between
+tools: about 4, 9, 15 and 26% in Python (mapclassify) and 2.4, 8.6, 15.3
+and 25.5% in QGIS. Both are fine; it is a nice point about methods.</li>
+<li>QGIS does not draw features whose Graduated value is NULL. The hint
+shows a rule-based “no data” class.</li>
+<li>Discuss the poverty map near campus: student populations raise
+poverty rates. It is a good moment to talk about what a Census measure
+does and does not mean.</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="getting-started-with-qgis">Getting Started with QGIS<a class="anchor" aria-label="anchor" href="#getting-started-with-qgis"></a>
 </h3>
 <ul>
-<li>Moved here from the Data Visualization module in October 2026. Data
-is loaded from this repository’s <code>data/</code> folder by URL.</li>
+<li>Moved here from the Data Visualization module in October 2026 and
+rebuilt in Step 8 on Indiana colleges (the Alaska airports remain in
+Workshop Session 1A). Data is loaded from this repository’s
+<code>data/</code> folder by URL. Each part ends with a
+<strong>Check</strong> line; ask learners to confirm it before moving
+on.</li>
+<li>
+<strong>QGIS 4:</strong> in Add Vector Layer &gt; Protocol, the
+<strong>Type</strong> list starts with cloud services (Alibaba Cloud OSS
+is preselected). Learners must pick <strong>HTTP/HTTPS/FTP</strong>, or
+the layer fails to load. QGIS 3 preselects HTTP.</li>
 <li>The OpenStreetMap basemap needs an internet connection; on a slow
 network, skip it.</li>
 <li>Loading from a web address (Layer &gt; Add Layer &gt; Add Vector
@@ -460,6 +529,21 @@ not, which is why the notebooks use an Esri basemap.)</li>
 <strong>Apply</strong> while comparing classification modes; encourage
 <strong>Apply</strong> so the dialog stays open.</li>
 <li>Remind learners to rename layers before making a legend.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="tables-joins-and-selections-in-qgis">Tables, Joins and Selections in QGIS<a class="anchor" aria-label="anchor" href="#tables-joins-and-selections-in-qgis"></a>
+</h3>
+<ul>
+<li>The ACS CSV loads with correct types because of
+<code>tippecanoe_acs_2024.csvt</code>. Without it, loading from the web
+gives text fields, and Delimited Text guesses <code>GEOID</code> as a
+number.</li>
+<li>Layers read from the web are read-only, so the Field Calculator only
+offers <strong>virtual fields</strong> (ticked and grayed out, with
+types Decimal (double) and Integer (32 bit)). That is expected.</li>
+<li>Division by zero returns NULL in QGIS expressions (tract 104).
+Stress that NULL is not 0%.</li>
 </ul>
 </div>
 </section><section><h2 class="section-heading" id="common-problems">Common problems<a class="anchor" aria-label="anchor" href="#common-problems"></a>
@@ -514,7 +598,10 @@ Add reference-style links below as needed.
 <hr class="half-width"></section><section id="python-basics"><h2 class="section-heading"><a href="python-basics.html">Python Basics</a></h2>
 <hr class="half-width"></section><section id="working-with-data"><h2 class="section-heading"><a href="working-with-data.html">Working with Data</a></h2>
 <hr class="half-width"></section><section id="geospatial-python"><h2 class="section-heading"><a href="geospatial-python.html">Geospatial Python Basics</a></h2>
+<hr class="half-width"></section><section id="map-your-county-python"><h2 class="section-heading"><a href="map-your-county-python.html">Map Your County in Python</a></h2>
 <hr class="half-width"></section><section id="qgisintro"><h2 class="section-heading"><a href="qgisintro.html">Getting Started with QGIS: Your First Map</a></h2>
+<hr class="half-width"></section><section id="qgis-tables"><h2 class="section-heading"><a href="qgis-tables.html">Tables, Joins and Selections in QGIS</a></h2>
+<hr class="half-width"></section><section id="map-your-county-qgis"><h2 class="section-heading"><a href="map-your-county-qgis.html">Map Your County in QGIS</a></h2>
 <hr class="half-width"></section></section>
 </div>
     </main>

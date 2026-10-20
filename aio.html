@@ -292,7 +292,43 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="qgisintro.html">5. Getting Started with QGIS: Your First Map</a>
+        <a href="map-your-county-python.html">5. Map Your County in Python</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush7">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading7">
+        <a href="qgisintro.html">6. Getting Started with QGIS: Your First Map</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush8">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading8">
+        <a href="qgis-tables.html">7. Tables, Joins and Selections in QGIS</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush9">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading9">
+        <a href="map-your-county-qgis.html">8. Map Your County in QGIS</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -376,7 +412,7 @@
         
 <section id="aio-introduction"><p>Content from <a href="introduction.html">Introduction to Foundations</a></p>
 <hr>
-<p>Last updated on 2026-10-17 |
+<p>Last updated on 2026-10-20 |
 
         <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -544,14 +580,29 @@ loops and functions</td>
 </tr>
 <tr>
 <td>Geospatial Python Basics</td>
-<td>Map layers with GeoPandas, coordinate reference systems, and joining
-data</td>
-<td>4a to 4c</td>
+<td>Map layers with GeoPandas, coordinate reference systems, joining
+data, and rasters</td>
+<td>4a to 4d</td>
+</tr>
+<tr>
+<td>Map Your County in Python</td>
+<td>Capstone: a Census table to a finished map</td>
+<td>5a</td>
 </tr>
 <tr>
 <td>Getting Started with QGIS</td>
 <td>Loading data from the web, styling layers and making a finished map
 layout</td>
+<td>none (QGIS)</td>
+</tr>
+<tr>
+<td>Tables, Joins and Selections in QGIS</td>
+<td>Joining Census tables, calculating rates and selecting features</td>
+<td>none (QGIS)</td>
+</tr>
+<tr>
+<td>Map Your County in QGIS</td>
+<td>Capstone: the same map, made in QGIS</td>
 <td>none (QGIS)</td>
 </tr>
 </tbody>
@@ -571,8 +622,9 @@ Collection</a>: repositories, census data, geocoding, imagery and field
 data</li>
 <li>
 <a href="https://spatialturn.github.io/DataAnalysis/" class="external-link">Data
-Analysis</a>: network analysis, spatial autocorrelation, clustering and
-NDVI</li>
+Analysis</a>: geoprocessing (buffers, overlays and distances, in QGIS
+and Python), then network analysis, spatial autocorrelation, clustering
+and NDVI</li>
 <li>
 <a href="https://spatialturn.github.io/DataVisualization/" class="external-link">Data
 Visualization</a>: charts, map design and accessibility</li>
@@ -608,7 +660,7 @@ scale bar</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>
@@ -1312,7 +1364,7 @@ Links listed here can be reused across pages as [text][name].
 Add reference-style links below as needed.
 --></section></section><section id="aio-geospatial-python"><p>Content from <a href="geospatial-python.html">Geospatial Python Basics</a></p>
 <hr>
-<p>Last updated on 2026-10-17 |
+<p>Last updated on 2026-10-20 |
 
         <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/geospatial-python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1331,6 +1383,8 @@ Add reference-style links below as needed.
 measuring?</li>
 <li>How do I combine a table with a map layer, or two layers with each
 other?</li>
+<li>How is raster data different from vector data, and how do I read
+it?</li>
 </ul>
 </div>
 </div>
@@ -1346,6 +1400,8 @@ it</li>
 system</li>
 <li>Measure areas and distances in meters</li>
 <li>Combine data with attribute joins and spatial joins</li>
+<li>Read a raster with rasterio, summarize its cells and clip it to a
+polygon</li>
 </ul>
 </div>
 </div>
@@ -1457,6 +1513,69 @@ in one table and a number in the other. Convert both to text (and pad
 with <code>zfill()</code> to the right length) before joining, and
 always compare the row counts before and after. A spatial join needs
 both layers in the same CRS.</p>
+</section><section><h2 class="section-heading" id="raster-data">Raster data<a class="anchor" aria-label="anchor" href="#raster-data"></a>
+</h2>
+<hr class="half-width">
+<p>A <strong>raster</strong> covers an area with a grid of equal cells,
+each holding one number: an elevation, a temperature, a satellite
+reflectance, or a class code such as “forest”. Rasters suit things that
+vary continuously across space, while vector data suits discrete
+features.</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th></th>
+<th>Vector</th>
+<th>Raster</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Stores</td>
+<td>Features with shapes and attributes</td>
+<td>A grid of cells, one value per cell per band</td>
+</tr>
+<tr>
+<td>Detail set by</td>
+<td>The accuracy of the shapes</td>
+<td>The <strong>cell size</strong> (resolution), for example 30 m</td>
+</tr>
+<tr>
+<td>Typical files</td>
+<td>GeoJSON, shapefile, GeoPackage</td>
+<td>GeoTIFF</td>
+</tr>
+<tr>
+<td>Python library</td>
+<td>GeoPandas</td>
+<td>
+<strong>rasterio</strong> (with NumPy)</td>
+</tr>
+</tbody>
+</table>
+<p>Every raster also has a CRS, an extent and a <strong>no-data
+value</strong> that marks cells with no measurement. Read the cells with
+<code>masked=True</code> so that value does not distort your
+statistics.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="im">import</span> rasterio</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1" aria-label="code-block-2-3"></a>dem <span class="op">=</span> rasterio.<span class="bu">open</span>(<span class="st">"https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_dem.tif"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1" aria-label="code-block-2-4"></a><span class="bu">print</span>(dem.crs, dem.res, dem.nodata)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1" aria-label="code-block-2-5"></a>elev <span class="op">=</span> dem.read(<span class="dv">1</span>, masked<span class="op">=</span><span class="va">True</span>)      <span class="co"># a NumPy array of elevations in meters</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1" aria-label="code-block-2-6"></a><span class="bu">print</span>(elev.<span class="bu">min</span>(), elev.<span class="bu">max</span>())</span></code></pre>
+</div>
+<p>Some rasters hold <strong>measurements</strong> (elevation,
+temperature): averages and histograms make sense. Others are
+<strong>categorical</strong> (land cover codes): count the cells of each
+class instead, because the average of “forest” and “water” means
+nothing. The Data Management module’s <a href="https://spatialturn.github.io/DataManagement/data-models.html" class="external-link">Geospatial
+Data Models</a> episode compares the two data models in more depth.</p>
 <div id="challenge-1-set_crs-or-to_crs" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1481,7 +1600,7 @@ draw them together.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>
@@ -1517,7 +1636,7 @@ What would you check first?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>Check the type and format of <code>GEOID</code> in both tables. A
 common cause is that one table stores it as text
@@ -1528,6 +1647,49 @@ California tract <code>"06001400100"</code> read as the number
 <code>.astype(str).str.zfill(11)</code> (11 characters for tracts) and
 join again. Also check that both tables cover the same year, because
 tract boundaries change between censuses.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-3-vector-or-raster" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-3-vector-or-raster" class="callout-inner">
+<h3 class="callout-title">Challenge 3: Vector or raster?</h3>
+<div class="callout-content">
+<p>Which data model would you choose for each, and why?</p>
+<ol style="list-style-type: decimal">
+<li>The locations of 17 supermarkets</li>
+<li>Air temperature across Indiana at 2 p.m.</li>
+<li>Land cover (forest, crops, water, developed) for a county</li>
+<li>Census tract boundaries with their population</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div class="accordion-body">
+<ol style="list-style-type: decimal">
+<li>
+<strong>Vector</strong> (points): a few discrete features with
+attributes such as a name.</li>
+<li>
+<strong>Raster</strong>: temperature varies continuously, so a grid
+of values fits.</li>
+<li>Usually <strong>raster</strong> (as in the NLCD land cover in
+notebook 4d), because satellites classify every cell. It can be
+converted to polygons, but the files grow large.</li>
+<li>
+<strong>Vector</strong> (polygons): tracts are discrete areas with
+attributes.</li>
+</ol>
 </div>
 </div>
 </div>
@@ -1547,6 +1709,8 @@ projected CRS in meters before measuring, and <code>set_crs()</code>
 only to label missing CRS information</li>
 <li>Attribute joins match IDs (make them the same type first); spatial
 joins match locations (same CRS first)</li>
+<li>A raster is a grid of cells with a CRS, a cell size and a no-data
+value; rasterio reads it into a NumPy array</li>
 </ul>
 </div>
 </div>
@@ -1582,14 +1746,229 @@ Joining Tables and Layers</a></td>
 <td>Fix a failing FIPS join, then find which stores lie inside the city
 limits</td>
 </tr>
+<tr>
+<td><a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/04d_Raster_Data_with_rasterio.ipynb" target="_blank" class="external-link">4d.
+Raster Data with rasterio</a></td>
+<td>Read Tippecanoe County elevation and land cover, look up values at
+points, and clip land cover to the cities</td>
+</tr>
 </tbody>
+</table>
+<!--
+Links listed here can be reused across pages as [text][name].
+Add reference-style links below as needed.
+--></section></section><section id="aio-map-your-county-python"><p>Content from <a href="map-your-county-python.html">Map Your County in Python</a></p>
+<hr>
+<p>Last updated on 2026-10-20 |
+
+        <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/map-your-county-python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>Can I take a Census table and boundaries all the way to a finished,
+shareable map on my own?</li>
+<li>What makes a map “finished”?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Join a Census table to tract boundaries and check the join</li>
+<li>Clean Census “no estimate” codes and zero denominators before
+calculating rates</li>
+<li>Choose a classification for a skewed rate and show missing data
+honestly</li>
+<li>Export a map with a title, legend, scale bar, north arrow and source
+line</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="the-capstone">The capstone<a class="anchor" aria-label="anchor" href="#the-capstone"></a>
+</h2>
+<hr class="half-width">
+<p>This episode is a small project that uses everything in the Python
+part of Foundations: reading data from the web (notebooks 3a and 4a),
+coordinate systems (4b), joins (4c) and plotting (3b). The instructions
+are shorter than before. Each step says what to do and offers a hint and
+a hidden solution, so try first and peek only when you are stuck.</p>
+<p><strong>The brief.</strong> A local food bank wants a one-page map of
+where households without a car live in Tippecanoe County, Indiana, to
+plan a delivery service. You will deliver it as a PNG image that a
+reader with no GIS experience can understand.</p>
+<p>The data is the same as in the QGIS version of this capstone, so you
+can compare your result with a colleague who uses QGIS:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>File</th>
+<th>Contents</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>tippecanoe_tracts.geojson</code></td>
+<td>43 census tract boundaries with <code>GEOID</code>
+</td>
+</tr>
+<tr>
+<td><code>tippecanoe_acs_2024.csv</code></td>
+<td>ACS 2024 5-year estimates per tract, downloaded once from the Census
+API for this lesson</td>
+</tr>
+</tbody>
+</table>
+<p>An optional last section shows how to make the same map for
+<strong>your own county</strong>, using your own Census API key.</p>
+</section><section><h2 class="section-heading" id="what-a-finished-map-needs">What a finished map needs<a class="anchor" aria-label="anchor" href="#what-a-finished-map-needs"></a>
+</h2>
+<hr class="half-width">
+<p>A map leaves your hands and is read without you there to explain it.
+It needs to answer four questions on its own:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Question</th>
+<th>Map element</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>What is shown, and in what units?</td>
+<td>A <strong>title</strong> (ideally stating the finding) and a
+<strong>legend</strong> with units</td>
+</tr>
+<tr>
+<td>Where is it, and how big?</td>
+<td>Recognizable shapes, a <strong>scale bar</strong>, a <strong>north
+arrow</strong>
+</td>
+</tr>
+<tr>
+<td>Where does the data come from, and when?</td>
+<td>A <strong>source line</strong> with the dataset and year</td>
+</tr>
+<tr>
+<td>What is missing?</td>
+<td>A visible <strong>no data</strong> class, never a misleading
+zero</td>
+</tr>
+</tbody>
+</table></section><section><h2 class="section-heading" id="three-traps-in-real-census-tables">Three traps in real Census tables<a class="anchor" aria-label="anchor" href="#three-traps-in-real-census-tables"></a>
+</h2>
+<hr class="half-width">
+<p>You will meet all three in this capstone:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>IDs as numbers.</strong> Read <code>GEOID</code> as text, or
+leading zeros vanish and joins fail in states with codes that start with
+0.</li>
+<li>
+<strong>Special codes.</strong> The Census Bureau writes
+<strong>-666666666</strong> where it cannot estimate a value (median
+income in two Purdue tracts here). Replace codes with missing values
+before any calculation.</li>
+<li>
+<strong>Zero denominators.</strong> A tract made of residence halls
+has people but <strong>no households</strong>, so a rate per household
+does not exist there. It must be missing, not 0%.</li>
+</ol>
+<div id="challenge-which-classification" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-which-classification" class="callout-inner">
+<h3 class="callout-title">Challenge: Which classification?</h3>
+<div class="callout-content">
+<p>The share of households without a vehicle ranges from under 1% to
+about 41%, and most tracts are below 10%. Which classification would you
+use for a five-class choropleth: equal interval, quantile, or natural
+breaks?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>With a <strong>skewed</strong> distribution, equal interval puts most
+tracts in the lowest one or two classes and wastes the rest.
+<strong>Natural breaks</strong> follows the gaps in the data and shows
+both the many low tracts and the few very high ones;
+<strong>quantile</strong> (equal counts) gives every class the same
+number of tracts, which is good for rankings but can split similar
+values. The notebook uses natural breaks. Whatever you choose, say so in
+the legend or a note.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Join, then check: row counts and unmatched rows</li>
+<li>Clean special codes and zero denominators before computing
+rates</li>
+<li>Project to meters, pick classes that suit the distribution, and show
+missing data clearly</li>
+<li>A finished map has a title, legend with units, scale bar, north
+arrow and source line</li>
+</ul>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="notebook">Notebook<a class="anchor" aria-label="anchor" href="#notebook"></a>
+</h2>
+<hr class="half-width">
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Notebook</th>
+<th>What you will do</th>
+</tr></thead>
+<tbody><tr>
+<td><a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/05a_Map_Your_County.ipynb" target="_blank" class="external-link">5a.
+Map Your County</a></td>
+<td>Join, clean, classify and finish a map of households without a car,
+then a poverty map; optionally repeat it for your own county</td>
+</tr></tbody>
 </table>
 <!--
 Links listed here can be reused across pages as [text][name].
 Add reference-style links below as needed.
 --></section></section><section id="aio-qgisintro"><p>Content from <a href="qgisintro.html">Getting Started with QGIS: Your First Map</a></p>
 <hr>
-<p>Last updated on 2026-10-17 |
+<p>Last updated on 2026-10-20 |
 
         <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/qgisintro.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1636,8 +2015,9 @@ source, and export it</li>
 <hr class="half-width">
 <p>You need QGIS installed. If you have not installed it yet, or the
 interface is new to you, follow the <a href="index.html#setup">Setup page</a>
-first. These steps were written for the QGIS 3.x Long Term Release;
-menus may differ slightly in other versions.</p>
+first. These steps were checked in <strong>QGIS 4.0</strong>; QGIS 3.34
+and later look almost the same, and differences are noted where they
+matter.</p>
 <p>We will use two small datasets hosted with this lesson. <strong>You
 do not need to download anything:</strong> QGIS can read a file directly
 from its web address.</p>
@@ -1654,11 +2034,12 @@ from its web address.</p>
 </tr></thead>
 <tbody>
 <tr>
-<td>Alaska airports (points)</td>
-<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/alaska_airports.geojson</code></td>
-<td>76 airports with <code>name</code>, <code>use</code> (civilian,
-military and so on) and <code>elevation</code>. From the QGIS sample
-dataset.</td>
+<td>Indiana colleges (points)</td>
+<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_colleges.geojson</code></td>
+<td>70 degree-granting colleges and universities with <code>name</code>,
+<code>city</code>, <code>control</code> (Public, Private nonprofit,
+Private for-profit) and <code>level</code> (4-year or 2-year). From the
+National Center for Education Statistics (IPEDS, 2023).</td>
 </tr>
 <tr>
 <td>Indiana counties (polygons)</td>
@@ -1669,19 +2050,24 @@ dataset.</td>
 </tr>
 </tbody>
 </table>
+<p>Each part below ends with a <strong>Check</strong> line that says
+what you should see. If your screen does not match, fix that part before
+moving on; most problems later come from a step that went wrong
+earlier.</p>
 <hr></section><section><h2 class="section-heading" id="part-1-add-a-basemap">Part 1: Add a basemap<a class="anchor" aria-label="anchor" href="#part-1-add-a-basemap"></a>
 </h2>
 <hr class="half-width">
 <p>A basemap gives your data geographic context.</p>
 <ol style="list-style-type: decimal">
 <li>In the <strong>Browser</strong> panel (usually on the left), expand
-<strong>XYZ Tiles</strong>.</li>
+<strong>XYZ Tiles</strong>. If you do not see the Browser panel, open it
+with <strong>View &gt; Panels &gt; Browser</strong>.</li>
 <li>Right-click <strong>OpenStreetMap</strong> and choose <strong>Add
 Layer to Project</strong>.</li>
-<li>A world map appears in the map canvas.</li>
 </ol>
-<p>If you do not see the Browser panel, open it with <strong>View &gt;
-Panels &gt; Browser</strong>.</p>
+<p><strong>Check:</strong> a world map fills the map canvas, and
+<code>OpenStreetMap</code> is listed in the <strong>Layers</strong>
+panel.</p>
 <hr></section><section><h2 class="section-heading" id="part-2-load-a-layer-from-the-web">Part 2: Load a layer from the web<a class="anchor" aria-label="anchor" href="#part-2-load-a-layer-from-the-web"></a>
 </h2>
 <hr class="half-width">
@@ -1691,21 +2077,25 @@ Layer</strong>.</li>
 <li>Under <strong>Source Type</strong>, choose <strong>Protocol:
 HTTP(S), cloud, etc.</strong>
 </li>
-<li>Leave <strong>Type</strong> as <strong>HTTP/HTTPS/FTP</strong>.</li>
-<li>In <strong>URI</strong>, paste the airports web address from the
+<li>Set <strong>Type</strong> to <strong>HTTP/HTTPS/FTP</strong>. (In
+QGIS 4 this list starts with cloud storage services, so check it; in
+QGIS 3 it is already selected.)</li>
+<li>In <strong>URI</strong>, paste the colleges web address from the
 table above.</li>
 <li>Click <strong>Add</strong>, then <strong>Close</strong>.</li>
 </ol>
-<p>The 76 airports appear as points over Alaska, and a layer called
-<code>alaska_airports</code> appears in the <strong>Layers</strong>
-panel.</p>
-<ol start="6" style="list-style-type: decimal">
+<figure><img src="fd_qgis_add_layer.png" alt="Screenshot of the QGIS Data Source Manager on the Vector page. Source Type is set to Protocol: HTTP(S), cloud, etc. Under Protocol, Type is HTTP/HTTPS/FTP and the URI box holds the web address of indiana_colleges.geojson on raw.githubusercontent.com. Authentication is left at No Authentication. The Add button is at the bottom right." class="figure mx-auto d-block"><div class="figcaption">The Data Source Manager set up to load a layer
+from a web address.</div>
+</figure><ol start="6" style="list-style-type: decimal">
 <li>If the points are hidden under the basemap, drag
-<code>alaska_airports</code> above <code>OpenStreetMap</code> in the
+<code>indiana_colleges</code> above <code>OpenStreetMap</code> in the
 Layers panel. Layers at the top of the list are drawn on top.</li>
-<li>Right-click the airports layer and choose <strong>Zoom to
+<li>Right-click the colleges layer and choose <strong>Zoom to
 Layer</strong>.</li>
 </ol>
+<p><strong>Check:</strong> about 70 points over Indiana, with clusters
+around Indianapolis, Fort Wayne and the Chicago suburbs in the
+northwest.</p>
 <div id="loading-local-files" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1718,7 +2108,8 @@ Layer</strong>.</li>
 Type</strong> as <strong>File</strong> and browse to it. For a
 shapefile, select the <code>.shp</code> file; the <code>.dbf</code>,
 <code>.shx</code>, <code>.prj</code> and <code>.cpg</code> files with
-the same name must be in the same folder.</p>
+the same name must be in the same folder. A zipped shapefile can be
+added directly, without unzipping.</p>
 </div>
 </div>
 </div>
@@ -1728,46 +2119,44 @@ creates a <code>.qgz</code> file) and save regularly as you work.</p>
 </h2>
 <hr class="half-width">
 <ol style="list-style-type: decimal">
-<li>Right-click the airports layer and choose <strong>Open Attribute
+<li>Right-click the colleges layer and choose <strong>Open Attribute
 Table</strong>.</li>
-<li>You should see <strong>76 rows</strong>, one per airport, with the
-columns <code>name</code>, <code>use</code> and
-<code>elevation</code>.</li>
-<li>Click the <code>use</code> column header to sort it. How many
-airports are military?</li>
+<li>Click the <code>control</code> column header to sort it.</li>
+<li>Click the <strong>Identify Features</strong> tool (the “i” icon on
+the toolbar), then click one point on the map to see its attributes in a
+panel.</li>
 </ol>
+<p><strong>Check:</strong> the table has <strong>70 rows</strong>, one
+per college, and the columns <code>name</code>, <code>city</code>,
+<code>control</code>, <code>level</code> and <code>unitid</code> (the
+federal ID). 16 colleges are Public, 42 Private nonprofit and 12 Private
+for-profit.</p>
 <p>The attribute table holds the data behind the map. Every styling
-choice you make next is based on one of these columns.</p>
-<p>You can also click a single airport with the <strong>Identify
-Features</strong> tool (the “i” icon on the toolbar) to see its
-attributes.</p>
+choice you make next is based on one of these columns. Look up Purdue:
+why might “Purdue University Global”, an online university, appear in
+West Lafayette? (Its official address is there; locations in a dataset
+are not always where the activity happens.)</p>
 <hr></section><section><h2 class="section-heading" id="part-4-style-the-points">Part 4: Style the points<a class="anchor" aria-label="anchor" href="#part-4-style-the-points"></a>
 </h2>
 <hr class="half-width">
-<p>First, give the airports a clearer symbol than the default dot.</p>
+<p>Color the colleges by who runs them:</p>
 <ol style="list-style-type: decimal">
-<li>Right-click the airports layer and choose
+<li>Right-click the colleges layer and choose
 <strong>Properties</strong>, then the <strong>Symbology</strong>
 tab.</li>
-<li>With <strong>Single Symbol</strong> selected at the top, scroll the
-symbol library at the bottom and choose a marker such as <strong>topo
-airport</strong>. Set the <strong>Size</strong> to about 5
-millimeters.</li>
-<li>Click <strong>Apply</strong>.</li>
-</ol>
-<figure><img src="symbology.png" alt="Screenshot of the QGIS Layer Properties dialog for the airports layer on the Symbology tab. Single Symbol is selected at the top, the marker is an airplane SVG symbol called topo airport, color is black, opacity 100 percent and size 5 millimeters. The symbol library below shows topo airport, topo camp, topo hospital and topo pop capital." class="figure mx-auto d-block"><div class="figcaption">Layer Properties, Symbology tab, with the topo
-airport marker selected</div>
-</figure><p>Now color the airports by how they are used:</p>
-<ol start="4" style="list-style-type: decimal">
-<li>Change <strong>Single Symbol</strong> to
+<li>At the top, change <strong>Single Symbol</strong> to
 <strong>Categorized</strong>.</li>
-<li>Set <strong>Value</strong> to <code>use</code>.</li>
-<li>Click <strong>Classify</strong>. Each airport type gets its own
-color.</li>
+<li>Set <strong>Value</strong> to <code>control</code>.</li>
+<li>Click <strong>Classify</strong>. Each type gets its own color. (QGIS
+also adds an empty “all other values” row; you can leave it.)</li>
 <li>Double-click a symbol to change its color or size. Use clearly
-different colors (or shapes) for the four types.</li>
+different colors, and a size of about 3 millimeters.</li>
 <li>Click <strong>OK</strong>.</li>
 </ol>
+<figure><img src="fd_qgis_categorized.png" alt="Screenshot of the QGIS Layer Properties dialog for the colleges layer on the Symbology tab. The renderer at the top is Categorized and Value is control. The list of classes shows three symbols and values: Public in green, Private nonprofit in purple and Private for-profit in orange, each with a matching legend label. Below the list are the Classify, plus, minus, Delete All and Delete Unused buttons, and OK, Cancel, Apply and Help at the bottom." class="figure mx-auto d-block"><div class="figcaption">Layer Properties, Symbology tab, with
+Categorized symbology on the control field.</div>
+</figure><p><strong>Check:</strong> three colors on the map, and three entries
+under the layer in the Layers panel.</p>
 <p>Each renderer is suited to a type of data:</p>
 <table class="table">
 <colgroup>
@@ -1784,12 +2173,12 @@ different colors (or shapes) for the four types.</li>
 <tr>
 <td><strong>Single Symbol</strong></td>
 <td>Showing where things are</td>
-<td>All airports in one style</td>
+<td>All colleges in one style</td>
 </tr>
 <tr>
 <td><strong>Categorized</strong></td>
 <td>Categories (no order)</td>
-<td>Airport <code>use</code>
+<td>College <code>control</code>
 </td>
 </tr>
 <tr>
@@ -1802,7 +2191,8 @@ different colors (or shapes) for the four types.</li>
 </table>
 <p>To rename the layer, as it will appear in the legend, open
 <strong>Properties &gt; Source</strong> and change the <strong>Layer
-name</strong> (for example, to “Airports by use”).</p>
+name</strong> (for example, to “Colleges by control”), or right-click it
+and choose <strong>Rename Layer</strong>.</p>
 <hr></section><section><h2 class="section-heading" id="part-5-build-a-choropleth-map">Part 5: Build a choropleth map<a class="anchor" aria-label="anchor" href="#part-5-build-a-choropleth-map"></a>
 </h2>
 <hr class="half-width">
@@ -1829,6 +2219,8 @@ fewer than 200 people per square mile, and Marion County (Indianapolis)
 has over 2,000. With Equal Interval, almost every county lands in the
 lightest class. Choose the mode that best shows your message, and click
 <strong>OK</strong>.</p>
+<p><strong>Check:</strong> with Natural Breaks, Marion County is alone
+in the darkest class.</p>
 <div id="why-density-and-not-population" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1846,6 +2238,10 @@ of Map Design</a> episode.</p>
 </div>
 </div>
 </div>
+<p>For the layout below, keep the counties as a light, plain background:
+switch their symbology back to <strong>Single Symbol</strong> with a
+pale fill, or untick the choropleth layer and load the counties a second
+time. A map with two strong color schemes is hard to read.</p>
 <hr></section><section><h2 class="section-heading" id="part-6-create-a-map-layout">Part 6: Create a map layout<a class="anchor" aria-label="anchor" href="#part-6-create-a-map-layout"></a>
 </h2>
 <hr class="half-width">
@@ -1863,8 +2259,9 @@ Label</strong>, drag a box above the map, and type your title in the
 <strong>Item Properties</strong> panel. Make it large.</li>
 <li>
 <strong>Add a legend:</strong> choose <strong>Add Item &gt; Add
-Legend</strong> and drag a box. In Item Properties, you can rename
-entries and remove the basemap from the legend.</li>
+Legend</strong> and drag a box. In Item Properties, untick <strong>Auto
+update</strong>, then remove the basemap from the legend with the minus
+button and rename entries by double-clicking them.</li>
 <li>
 <strong>Add a scale bar:</strong> choose <strong>Add Item &gt; Add
 Scale Bar</strong>. Set the units to miles or kilometers.</li>
@@ -1873,13 +2270,17 @@ Scale Bar</strong>. Set the units to miles or kilometers.</li>
 North Arrow</strong>.</li>
 <li>
 <strong>Add a source line:</strong> add another label at the bottom
-with the data source and your name, for example “Data: U.S. Census
-Bureau, BLS. Map by A. Student, 2026.”</li>
+with the data source and your name, for example “Data: NCES IPEDS 2023;
+U.S. Census Bureau. Basemap: OpenStreetMap contributors. Map by A.
+Student, 2026.”</li>
 </ol>
-<figure><img src="additemmap.png" alt="Screenshot of the QGIS Print Layout window titled Airports in Alaska. The Add Item menu is open, listing Add Map, Add 3D Map, Add Picture, Add Label, Add Dynamic Text, Add Legend, Add Scale Bar, Add North Arrow, Add Shape and other items. The page shows a map frame containing Alaska with airport symbols over an OpenStreetMap basemap." class="figure mx-auto d-block"><div class="figcaption">Print Layout with the Add Item menu open</div>
-</figure><p>Use <strong>Item Properties</strong> to change fonts, sizes and
+<p>Use <strong>Item Properties</strong> to change fonts, sizes and
 frames. Use the <strong>Move Item Content</strong> tool to pan the map
 inside its frame without moving the frame.</p>
+<figure><img src="fd_qgis_layout.png" alt="Screenshot of the QGIS Print Layout window. The toolbar on the left has the tools for adding items (map, picture, label, legend, scale bar, north arrow, shapes and more). The A4 page in the middle holds a title, a map of Indiana counties with colleges shown as colored dots, a north arrow at the top left of the map, a legend titled Colleges by control at the lower right, a scale bar from 0 to 100 km at the lower left and a source line under the map. The Items panel on the right lists the six items: the source label, the picture (north arrow), the scale bar, the legend, the title label and Map 1." class="figure mx-auto d-block"><div class="figcaption">The Print Layout window with a finished
+page.</div>
+</figure><p><strong>Check:</strong> the page shows the map, a title, a legend
+without the basemap, a scale bar, a north arrow and a source line.</p>
 <hr></section><section><h2 class="section-heading" id="part-7-export">Part 7: Export<a class="anchor" aria-label="anchor" href="#part-7-export"></a>
 </h2>
 <hr class="half-width">
@@ -1890,16 +2291,19 @@ Image</strong> (PNG) or <strong>Layout &gt; Export as PDF</strong>.</li>
 <li>Save the project again (<code>.qgz</code>). The layout is saved
 inside the project.</li>
 </ol>
-<figure><img src="airportmap.png" alt="A finished QGIS map titled Airports in Alaska, USA. Black airplane symbols mark 76 airports across Alaska over an OpenStreetMap basemap that also shows western Canada. A legend lists Alaska Airports and OpenStreetMap, with a north arrow and a scale bar from 0 to 500 kilometers. Author and date appear below the map." class="figure mx-auto d-block"><div class="figcaption">An example finished layout: airports in
-Alaska</div>
-</figure><p>This example uses a single airport symbol. Your version will also
-show the airport types from Part 4. Notice that it is missing one
-element from our list: a <strong>data source</strong> line.</p>
-<hr></section><section><h2 class="section-heading" id="common-beginner-mistakes">Common beginner mistakes<a class="anchor" aria-label="anchor" href="#common-beginner-mistakes"></a>
+<p>This example uses a plain county background instead of the basemap,
+which often reads better on paper.</p>
+<figure><img src="fd_qgis_final_map.png" alt="A finished QGIS map titled Colleges and universities in Indiana, by control. Indiana's 92 counties are drawn in pale gray with thin outlines, and colleges are colored dots: green for Public, purple for Private nonprofit and orange for Private for-profit. The dots cluster around Indianapolis, Fort Wayne, South Bend and the Chicago suburbs in the northwest. A legend at the lower right lists the three types, a scale bar from 0 to 100 km sits at the lower left, a north arrow at the upper left, and a source line under the map credits NCES IPEDS 2023 and the U.S. Census Bureau." class="figure mx-auto d-block"><div class="figcaption">An example finished layout: colleges and
+universities in Indiana.</div>
+</figure><hr></section><section><h2 class="section-heading" id="common-beginner-mistakes">Common beginner mistakes<a class="anchor" aria-label="anchor" href="#common-beginner-mistakes"></a>
 </h2>
 <hr class="half-width">
 <ul>
 <li>Forgetting to save the project</li>
+<li>Loading a web address with the wrong protocol <strong>Type</strong>
+(Part 2): the layer fails to load</li>
+<li>Data loaded but not visible: use <strong>Zoom to Layer</strong> and
+check the layer order</li>
 <li>Mapping counts instead of rates on a choropleth map</li>
 <li>Leaving layer names such as <code>indiana_counties</code> in the
 legend</li>
@@ -1977,18 +2381,17 @@ writing a conclusion like this.</li>
 </div>
 </div>
 </div>
-<div id="challenge-2-fix-the-projection-optional" class="callout challenge">
+<div id="challenge-2-show-and-label-only-public-universities-optional" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
 <span class="callout-header">Challenge</span>
-<div id="challenge-2-fix-the-projection-optional" class="callout-inner">
-<h3 class="callout-title">Challenge 2: Fix the projection
-(optional)</h3>
+<div id="challenge-2-show-and-label-only-public-universities-optional" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Show and label only public
+universities (optional)</h3>
 <div class="callout-content">
-<p>Alaska looks stretched over the OpenStreetMap basemap, which uses Web
-Mercator. Change the project’s coordinate reference system to one
-designed for Alaska and compare.</p>
+<p>Make the colleges layer show only <strong>public 4-year</strong>
+institutions, and label them with their names.</p>
 </div>
 </div>
 </div>
@@ -1999,13 +2402,21 @@ designed for Alaska and compare.</p>
 </button>
 <div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>Click the <strong>EPSG code</strong> in the bottom-right corner of
-the QGIS window (or <strong>Project &gt; Properties &gt; CRS</strong>),
-search for <strong>3338</strong> (NAD83 / Alaska Albers), select it and
-click <strong>OK</strong>. The map is redrawn in an equal area
-projection for Alaska, and the state no longer looks enormously
-stretched. The basemap is reprojected too, although its labels may look
-slightly blurred.</p>
+<ol style="list-style-type: decimal">
+<li>Right-click the colleges layer and choose <strong>Filter…</strong>.
+Enter the expression
+<code>"control" = 'Public' AND "level" = '4-year or above'</code> and
+click <strong>OK</strong>. The layer now shows only those features (the
+filter icon appears next to its name), and the attribute table lists
+only them.</li>
+<li>Open <strong>Properties &gt; Labels</strong>, choose <strong>Single
+Labels</strong>, set <strong>Value</strong> to <code>name</code>, and
+click <strong>OK</strong>.</li>
+<li>To show everything again, open <strong>Filter…</strong> and clear
+the expression.</li>
+</ol>
+<p>Field names go in double quotes and text values in single quotes;
+mixing them up is the most common expression error.</p>
 </div>
 </div>
 </div>
@@ -2031,8 +2442,11 @@ as <strong>EPSG:26916</strong> (UTM zone 16N) for Indiana.</li>
 <li>If a layer appears in the wrong place, check its CRS before anything
 else.</li>
 </ul>
-<p>Notebook 4b in this module shows the same ideas in Python, and the
-Data Management module’s <a href="https://spatialturn.github.io/DataManagement/crs.html" class="external-link">Coordinate
+<p>Try it: click the EPSG code in the bottom-right corner, search for
+<strong>26916</strong>, and click <strong>OK</strong>. Indiana looks
+slightly narrower and less stretched than on the Web Mercator basemap.
+Notebook 4b in this module shows the same ideas in Python, and the Data
+Management module’s <a href="https://spatialturn.github.io/DataManagement/crs.html" class="external-link">Coordinate
 Reference Systems</a> episode explains the theory.</p>
 </div>
 </div>
@@ -2071,8 +2485,10 @@ north arrow, source) come together.</li>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>Add Vector Layer with the HTTP(S) protocol loads data straight from
-a web address.</li>
+<li>Add Vector Layer with the HTTP(S) protocol (Type HTTP/HTTPS/FTP)
+loads data straight from a web address.</li>
+<li>Use the Check lines: Zoom to Layer and layer order solve most
+“missing data” problems.</li>
 <li>The attribute table holds the data behind every styling choice.</li>
 <li>Use Categorized for categories and Graduated for numbers, and
 compare classification modes.</li>
@@ -2089,6 +2505,836 @@ anything.</li>
 Links listed here can be reused across pages as [text][name].
 Add reference-style links below as needed.
 -->
+</section></section><section id="aio-qgis-tables"><p>Content from <a href="qgis-tables.html">Tables, Joins and Selections in QGIS</a></p>
+<hr>
+<p>Last updated on 2026-10-20 |
+
+        <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/qgis-tables.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How do I attach a table of statistics to map features in QGIS?</li>
+<li>Why do ID columns cause so many failed joins?</li>
+<li>How do I calculate rates, and what happens with zeros and missing
+values?</li>
+<li>How do I select and export the features that meet a condition?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Load a CSV table from the web and inspect field types</li>
+<li>Join a Census table to census tracts with a table join, and check
+that it worked</li>
+<li>Create rate fields with the Field Calculator and handle division by
+zero and Census “no estimate” codes</li>
+<li>Select features by expression, summarize them, and export the
+result</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="why-tables-matter">Why tables matter<a class="anchor" aria-label="anchor" href="#why-tables-matter"></a>
+</h2>
+<hr class="half-width">
+<p>Most social science data arrives as a <strong>table</strong>: a
+spreadsheet of counts by county, tract or ZIP code, with no shapes in
+it. To map it, you attach it to boundaries that share an
+<strong>ID</strong>. This is the most common task in applied GIS, and
+also the most common place for silent mistakes.</p>
+<p>This episode uses Tippecanoe County, Indiana (Lafayette and West
+Lafayette):</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Dataset</th>
+<th>Web address</th>
+<th>Contents</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Census tracts (polygons)</td>
+<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson</code></td>
+<td>43 tracts with <code>GEOID</code>, <code>name</code> and land area
+<code>aland_m2</code>
+</td>
+</tr>
+<tr>
+<td>ACS 2024 table (no shapes)</td>
+<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv</code></td>
+<td>One row per tract: <code>GEOID</code>, <code>total_pop</code>,
+<code>pop_under18</code>, <code>median_income</code>,
+<code>poverty_universe</code>, <code>below_poverty</code>,
+<code>households</code>, <code>hh_no_vehicle</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The table holds 2024 American Community Survey (ACS) 5-year
+estimates, downloaded once from the Census API for this lesson. The Data
+Collection module’s <a href="https://spatialturn.github.io/DataCollection/census.html" class="external-link">Census
+episode</a> shows how to request them yourself. The same steps in Python
+are in Foundations notebooks 3a (tables) and 4c (joins).</p>
+</section><section><h2 class="section-heading" id="ids-types-and-joins">IDs, types and joins<a class="anchor" aria-label="anchor" href="#ids-types-and-joins"></a>
+</h2>
+<hr class="half-width">
+<p>A <strong>table join</strong> (also called an attribute join) adds
+the columns of a table to the features of a layer wherever an ID
+matches. Census data uses <strong>GEOIDs</strong>, built by
+concatenating codes:</p>
+<table class="table">
+<thead><tr>
+<th>Part</th>
+<th>Digits</th>
+<th>Tippecanoe example</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>State</td>
+<td>2</td>
+<td>
+<code>18</code> (Indiana)</td>
+</tr>
+<tr>
+<td>County</td>
+<td>3</td>
+<td>
+<code>157</code> (Tippecanoe)</td>
+</tr>
+<tr>
+<td>Tract</td>
+<td>6</td>
+<td><code>010400</code></td>
+</tr>
+<tr>
+<td>Tract GEOID</td>
+<td>11</td>
+<td><code>18157010400</code></td>
+</tr>
+</tbody>
+</table>
+<p>A GEOID looks like a number but is really a <strong>code</strong>,
+and it should be stored as <strong>text</strong>. Alabama’s state code
+is <code>01</code>, so an Alabama tract GEOID such as
+<code>01001020100</code> loses its leading zero if a program reads it as
+a number (<code>1001020100</code>), and it will never match the text
+version in the boundary file. Every field has a <strong>type</strong>
+(text, integer, decimal, date), and QGIS shows it next to the field
+name. Checking types before a join saves hours.</p>
+<p>After every join, check two things:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Did every feature find a match?</strong> Count the features
+whose joined columns are empty (NULL).</li>
+<li>
+<strong>Did any feature match twice?</strong> A table with duplicate
+IDs can make a join pick an arbitrary row.</li>
+</ol></section><section><h2 class="section-heading" id="rates-zeros-and-missing-values">Rates, zeros and missing values<a class="anchor" aria-label="anchor" href="#rates-zeros-and-missing-values"></a>
+</h2>
+<hr class="half-width">
+<p>Counts mostly show where many people live. To compare tracts, divide
+by the right <strong>denominator</strong>:</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Rate</th>
+<th>Numerator</th>
+<th>Denominator</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Households without a vehicle (%)</td>
+<td><code>hh_no_vehicle</code></td>
+<td><code>households</code></td>
+</tr>
+<tr>
+<td>Below the poverty line (%)</td>
+<td><code>below_poverty</code></td>
+<td>
+<code>poverty_universe</code> (people whose poverty status is
+known)</td>
+</tr>
+<tr>
+<td>Children (%)</td>
+<td><code>pop_under18</code></td>
+<td><code>total_pop</code></td>
+</tr>
+</tbody>
+</table>
+<p>Two kinds of trouble appear in real Census tables:</p>
+<ul>
+<li>
+<strong>Zero denominators.</strong> Census Tract 104 holds Purdue’s
+residence halls: 8,248 people but <strong>0 households</strong> and a
+poverty universe of <strong>0</strong>, because people in group quarters
+(dorms, prisons, nursing homes) are not households and are excluded from
+poverty counts. Dividing by zero has no answer; QGIS returns
+<strong>NULL</strong>, which is correct, and the tract should be shown
+as “no data”, not as 0%.</li>
+<li>
+<strong>Special codes.</strong> Where the Census cannot produce an
+estimate it puts a code instead of a value. Median income is
+<strong>-666666666</strong> for tracts 104 and 105. If you leave it in,
+any average or map of income is ruined. Replace codes with NULL before
+using the field.</li>
+</ul>
+<p>Student populations also explain why tracts near campus show very
+high poverty rates: students often report low incomes while being
+supported by family or loans. That is a real feature of the data, not an
+error, but it must be explained in any map of poverty in a college
+town.</p>
+<hr></section><section><h2 class="section-heading" id="hands-on">Hands-on<a class="anchor" aria-label="anchor" href="#hands-on"></a>
+</h2>
+<hr class="half-width">
+<p>These steps were checked in QGIS 4.0 (QGIS 3.34 and later are nearly
+identical).</p>
+<div class="section level3">
+<h3 id="part-1-load-the-layer-and-the-table">Part 1: Load the layer and the table<a class="anchor" aria-label="anchor" href="#part-1-load-the-layer-and-the-table"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Load the tracts web address with <strong>Layer &gt; Add Layer &gt;
+Add Vector Layer</strong>, <strong>Source Type: Protocol: HTTP(S),
+cloud, etc.</strong>, <strong>Type: HTTP/HTTPS/FTP</strong>, as in the
+<a href="qgisintro.html">previous episode</a>.</li>
+<li>Load the ACS table web address the same way. A CSV without
+coordinates loads as a <strong>table</strong>: it appears in the Layers
+panel with a table icon and draws nothing on the map.</li>
+</ol>
+<p><strong>Check:</strong> 43 tract polygons over Tippecanoe County, and
+a <code>tippecanoe_acs_2024</code> table in the Layers panel.</p>
+</div>
+<div class="section level3">
+<h3 id="part-2-look-at-the-table-and-its-field-types">Part 2: Look at the table and its field types<a class="anchor" aria-label="anchor" href="#part-2-look-at-the-table-and-its-field-types"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Right-click <code>tippecanoe_acs_2024</code> and choose <strong>Open
+Attribute Table</strong>. Sort by <code>total_pop</code> by clicking its
+header. Find tracts 104 and 105 and look at <code>households</code> and
+<code>median_income</code>.</li>
+<li>Close the table. Right-click the table again, choose
+<strong>Properties &gt; Fields</strong>. The <strong>Type</strong>
+column shows <code>GEOID</code> and <code>name</code> as
+<strong>String</strong> (text) and the counts as
+<strong>Integer</strong>.</li>
+<li>Do the same for the tracts layer: its <code>GEOID</code> is also
+<strong>String</strong>. The two ID fields match in type, so the join
+will work.</li>
+</ol>
+<p><strong>Check:</strong> both <code>GEOID</code> fields are String,
+and tract 104 has 0 households.</p>
+<div id="how-did-qgis-know-the-types" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="how-did-qgis-know-the-types" class="callout-inner">
+<h3 class="callout-title">How did QGIS know the types?</h3>
+<div class="callout-content">
+<p>A CSV file is plain text and does not store types. This one comes
+with a small companion file, <code>tippecanoe_acs_2024.csvt</code>, that
+lists them, and QGIS reads it automatically. Without it, QGIS would read
+every column as text when loading from the web, or guess the types when
+you load a downloaded CSV with <strong>Layer &gt; Add Layer &gt; Add
+Delimited Text Layer</strong>. That dialog guesses <code>GEOID</code> is
+a number unless you tell it otherwise, which is exactly how leading
+zeros get lost in states whose codes start with 0.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="part-3-join-the-table-to-the-tracts">Part 3: Join the table to the tracts<a class="anchor" aria-label="anchor" href="#part-3-join-the-table-to-the-tracts"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Right-click the tracts layer, choose <strong>Properties</strong>,
+then the <strong>Joins</strong> tab.</li>
+<li>Click the green <strong>+</strong> button at the bottom.</li>
+<li>
+<strong>Join layer:</strong> <code>tippecanoe_acs_2024</code>.
+<strong>Join field:</strong> <code>GEOID</code>. <strong>Target
+field:</strong> <code>GEOID</code>.</li>
+<li>Leave <strong>Custom field name prefix</strong> as it is
+(<code>tippecanoe_acs_2024_</code>) or shorten it to <code>acs_</code>.
+This episode uses <code>acs_</code>.</li>
+<li>Click <strong>OK</strong>. The join appears in the list; click the
+arrow next to it to see its settings.</li>
+</ol>
+<figure><img src="fd_qgis_joins.png" alt="Screenshot of the QGIS Layer Properties dialog on the Joins tab. One join is listed and expanded: Join layer tippecanoe_acs_2024, Join field GEOID, Target field GEOID, Cache join layer in virtual memory ticked, Custom field name prefix acs_, Joined fields all. The add, remove and edit buttons are at the bottom left." class="figure mx-auto d-block"><div class="figcaption">The Joins tab of the tracts layer’s properties,
+with the join to the ACS table.</div>
+</figure><ol start="6" style="list-style-type: decimal">
+<li>Click <strong>OK</strong> again to close the Properties.</li>
+</ol>
+<p><strong>Check:</strong> open the tracts’ attribute table. New columns
+such as <code>acs_total_pop</code> and <code>acs_households</code>
+appear at the right, filled in for every row.</p>
+<p>To check for unmatched features properly, use an expression:</p>
+<ol style="list-style-type: decimal">
+<li>In the tracts’ attribute table, click <strong>Select features using
+an expression</strong> (the icon with an epsilon and a yellow
+square).</li>
+<li>Enter <code>"acs_total_pop" IS NULL</code> and click <strong>Select
+Features</strong>.</li>
+</ol>
+<p><strong>Check:</strong> the title bar of the table says
+<strong>0</strong> selected. If it says 43, the join failed completely;
+look again at the ID fields and their types.</p>
+<p>A table join is <strong>virtual</strong>: the CSV is not copied into
+the tracts file, and the columns are looked up each time. Part 6 shows
+how to save the result as a new file.</p>
+</div>
+<div class="section level3">
+<h3 id="part-4-calculate-rates-with-the-field-calculator">Part 4: Calculate rates with the Field Calculator<a class="anchor" aria-label="anchor" href="#part-4-calculate-rates-with-the-field-calculator"></a>
+</h3>
+<p>The tracts layer came from the web, so it is read-only. We add
+<strong>virtual fields</strong>: calculated columns stored in the
+project rather than in the data file, which suits read-only and joined
+layers.</p>
+<ol style="list-style-type: decimal">
+<li><p>In the tracts’ attribute table, click the <strong>Field
+Calculator</strong> (the abacus icon).</p></li>
+<li><p><strong>Create virtual field</strong> is already ticked and
+grayed out, with a note at the bottom: “This layer does not support
+adding new provider fields. You can only add virtual fields.” That is
+expected for a layer read from the web. <strong>Output field
+name:</strong> <code>pct_no_vehicle</code>. <strong>Output field
+type:</strong> <strong>Decimal (double)</strong>.</p></li>
+<li>
+<p>Expression:</p>
+<pre><code><span><span class="st">"acs_hh_no_vehicle"</span> <span class="op">/</span> <span class="st">"acs_households"</span> <span class="op">*</span> <span class="fl">100</span></span></code></pre>
+</li>
+<li><p>Look at the <strong>Preview</strong> under the expression, then
+click <strong>OK</strong>.</p></li>
+</ol>
+<figure><img src="fd_qgis_virtual_field.png" alt="Screenshot of the QGIS Field Calculator for the tracts layer. Create virtual field is ticked and grayed out. Output field name is pct_no_vehicle and Output field type is Decimal (double). The expression reads acs_hh_no_vehicle divided by acs_households times 100, and the preview for Census Tract 1 is 15.31. A note at the bottom says the layer does not support adding new provider fields, so only virtual fields can be added." class="figure mx-auto d-block"><div class="figcaption">The Field Calculator creating a virtual
+field.</div>
+</figure><p><strong>Check:</strong> a new <code>pct_no_vehicle</code> column.
+Sort it: the highest values (above 30%) are tracts 105, 55 and 4, and
+tract 104 shows <strong>NULL</strong> because it has no households.</p>
+<p>Now clean the income field. Create another virtual field,
+<code>income</code>, type <strong>Integer (32 bit)</strong>, with:</p>
+<pre><code>if("acs_median_income" &lt; 0, NULL, "acs_median_income")</code></pre>
+<p><code>if(condition, value if true, value if false)</code> is one of
+the most useful expressions in QGIS: here, any negative code becomes
+NULL and real values pass through.</p>
+<p><strong>Check:</strong> <code>income</code> is NULL for tracts 104
+and 105, and the lowest real value is about $12,600.</p>
+</div>
+<div class="section level3">
+<h3 id="part-5-select-by-expression-and-summarize">Part 5: Select by expression and summarize<a class="anchor" aria-label="anchor" href="#part-5-select-by-expression-and-summarize"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Open <strong>Select features using an expression</strong> again (or
+<strong>Edit &gt; Select &gt; Select Features by
+Expression</strong>).</li>
+<li>Enter <code>"pct_no_vehicle" &gt;= 10</code> and click
+<strong>Select Features</strong>, then <strong>Close</strong>.</li>
+<li>The selected tracts turn yellow on the map. Right-click the layer
+and choose <strong>Zoom to Selection</strong> if you like.</li>
+<li>Open <strong>View &gt; Panels &gt; Statistics</strong>, choose the
+tracts layer and the field <code>acs_hh_no_vehicle</code>, and tick
+<strong>Selected features only</strong>.</li>
+</ol>
+<p><strong>Check:</strong> 17 tracts are selected. The Statistics panel
+shows their total households without a vehicle.</p>
+<p>Selecting is different from <strong>filtering</strong>: a selection
+highlights features but keeps everything in the layer, while
+<strong>Filter…</strong> (right-click the layer) hides everything that
+does not match until you clear it.</p>
+</div>
+<div class="section level3">
+<h3 id="part-6-save-the-joined-result">Part 6: Save the joined result<a class="anchor" aria-label="anchor" href="#part-6-save-the-joined-result"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Right-click the tracts layer and choose <strong>Export &gt; Save
+Features As…</strong>
+</li>
+<li>
+<strong>Format:</strong> GeoPackage. <strong>File name:</strong>
+browse to your project folder and name it
+<code>tippecanoe_tracts_acs</code>.</li>
+<li>Tick <strong>Save only selected features</strong> if you want just
+the 17 tracts; leave it unticked for all 43.</li>
+<li>Click <strong>OK</strong>. The new layer is added to the map.</li>
+</ol>
+<p><strong>Check:</strong> open the new layer’s attribute table. The
+joined <code>acs_</code> columns and your virtual fields are now real
+columns in the file.</p>
+<hr>
+<div id="challenge-1-poverty-rate" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-1-poverty-rate" class="callout-inner">
+<h3 class="callout-title">Challenge 1: Poverty rate</h3>
+<div class="callout-content">
+<p>Create a virtual field <code>poverty_rate</code> with the share of
+people below the poverty line. Which tract has the highest rate, and
+which tract cannot have one?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Expression:
+<code>"acs_below_poverty" / "acs_poverty_universe" * 100</code>. The
+highest is Census Tract 105 (about 80%), followed by tracts 54.02, 55
+and 112, all near Purdue’s campus, where many residents are students.
+Tract 104 has a poverty universe of 0 (residence halls), so its rate is
+NULL.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-2-why-did-the-join-fail" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-2-why-did-the-join-fail" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Why did the join fail?</h3>
+<div class="callout-content">
+<p>A colleague joins a county table to Alabama county boundaries on
+<code>GEOID</code>. Every joined field is NULL. In the table,
+<code>GEOID</code> shows values like <code>1001</code>; in the
+boundaries, <code>01001</code>. What happened, and how can it be fixed
+in QGIS?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>The table’s <code>GEOID</code> was read as a <strong>number</strong>,
+which dropped the leading zero, so <code>1001</code> never matches the
+text <code>01001</code>. Fixes, from best to quickest:</p>
+<ul>
+<li>Reload the CSV and set the field type to text (in the Delimited Text
+dialog, <strong>Custom field types</strong>, or with a
+<code>.csvt</code> file).</li>
+<li>Or create a text field in the table with the Field Calculator,
+<code>lpad(to_string("GEOID"), 5, '0')</code>, and join on it
+instead.</li>
+</ul>
+<p>Then check again for NULLs.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-3-count-or-rate" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-3-count-or-rate" class="callout-inner">
+<h3 class="callout-title">Challenge 3: Count or rate?</h3>
+<div class="callout-content">
+<p>You want to show where households without a car are concentrated, to
+plan a grocery delivery service. Should the map show
+<code>acs_hh_no_vehicle</code> or <code>pct_no_vehicle</code>?
+Discuss.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>It depends on the question. For <strong>planning a service</strong>,
+the <strong>count</strong> matters: a large tract with 5% carless
+households may contain more households to serve than a small tract with
+30%. For <strong>comparing need</strong> or inequality between
+neighborhoods, the <strong>rate</strong> is fair because it removes the
+effect of tract size. A good choropleth uses the rate; counts are better
+shown with graduated symbols (circles sized by count). Many reports show
+both.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>A table join attaches a table to features by a shared ID; check that
+ID fields have the same type first</li>
+<li>Census GEOIDs are codes: store them as text so leading zeros
+survive</li>
+<li>After a join, select <code>"field" IS NULL</code> to find unmatched
+features</li>
+<li>Rates need the right denominator; division by zero gives NULL, and
+Census codes such as -666666666 must be replaced with NULL</li>
+<li>Selection highlights features, Filter hides the others, and Save
+Features As makes joins and virtual fields permanent</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Links listed here can be reused across pages as [text][name].
+Add reference-style links below as needed.
+-->
+</div>
+</section></section><section id="aio-map-your-county-qgis"><p>Content from <a href="map-your-county-qgis.html">Map Your County in QGIS</a></p>
+<hr>
+<p>Last updated on 2026-10-20 |
+
+        <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/map-your-county-qgis.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>Can I take a Census table and boundaries all the way to a finished,
+shareable map on my own?</li>
+<li>What makes a map “finished”?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Join a Census table to tract boundaries and check the join</li>
+<li>Clean Census “no estimate” codes and zero denominators before
+calculating rates</li>
+<li>Choose a classification for a skewed rate and show missing data
+honestly</li>
+<li>Export a print layout with a title, legend, scale bar, north arrow
+and source line</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="the-capstone">The capstone<a class="anchor" aria-label="anchor" href="#the-capstone"></a>
+</h2>
+<hr class="half-width">
+<p>This episode is a small project that uses everything in the QGIS part
+of Foundations: loading data from the web and making a layout (<a href="qgisintro.html">Getting Started with QGIS</a>), and joins, the
+Field Calculator and selections (<a href="qgis-tables.html">Tables,
+Joins and Selections</a>). The instructions are shorter than before:
+each step says what to do and which earlier part shows how. Try first,
+and open the hints only when you are stuck.</p>
+<p><strong>The brief.</strong> A local food bank wants a one-page map of
+where households without a car live in Tippecanoe County, Indiana, to
+plan a delivery service. You will deliver it as a PNG image that a
+reader with no GIS experience can understand.</p>
+<p>The data is the same as in the <a href="map-your-county-python.html">Python version</a> of this capstone,
+so you can compare your result with a colleague who uses Python:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Dataset</th>
+<th>Web address</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Census tracts</td>
+<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson</code></td>
+</tr>
+<tr>
+<td>ACS 2024 table</td>
+<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv</code></td>
+</tr>
+</tbody>
+</table></section><section><h2 class="section-heading" id="what-a-finished-map-needs">What a finished map needs<a class="anchor" aria-label="anchor" href="#what-a-finished-map-needs"></a>
+</h2>
+<hr class="half-width">
+<p>A map leaves your hands and is read without you there to explain it.
+It needs to answer four questions on its own:</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead><tr>
+<th>Question</th>
+<th>Map element</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>What is shown, and in what units?</td>
+<td>A <strong>title</strong> (ideally stating the finding) and a
+<strong>legend</strong> with units</td>
+</tr>
+<tr>
+<td>Where is it, and how big?</td>
+<td>Recognizable shapes, a <strong>scale bar</strong>, a <strong>north
+arrow</strong>
+</td>
+</tr>
+<tr>
+<td>Where does the data come from, and when?</td>
+<td>A <strong>source line</strong> with the dataset and year</td>
+</tr>
+<tr>
+<td>What is missing?</td>
+<td>A visible <strong>no data</strong> class, never a misleading
+zero</td>
+</tr>
+</tbody>
+</table>
+<hr></section><section><h2 class="section-heading" id="steps">Steps<a class="anchor" aria-label="anchor" href="#steps"></a>
+</h2>
+<hr class="half-width">
+<div class="section level3">
+<h3 id="start-a-project">1. Start a project<a class="anchor" aria-label="anchor" href="#start-a-project"></a>
+</h3>
+<p>Create a folder for the capstone, start a new QGIS project and save
+it there. Set the project CRS to <strong>EPSG:26916</strong> (UTM zone
+16N), so the map is not stretched and the scale bar is true.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Hint </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>Click the CRS button at the bottom right of the QGIS window, search
+for <code>26916</code> and click <strong>OK</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="load-and-join">2. Load and join<a class="anchor" aria-label="anchor" href="#load-and-join"></a>
+</h3>
+<p>Load both web addresses, join the table to the tracts on
+<code>GEOID</code>, and check that no tract is left without a match.</p>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Hint </h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div class="accordion-body">
+<p><a href="qgis-tables.html">Tables, Joins and Selections</a>, Parts 1
+to 3: <strong>Properties &gt; Joins</strong>, then select
+<code>"acs_total_pop" IS NULL</code> in the attribute table. 0 selected
+means every tract matched.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="calculate-the-rate">3. Calculate the rate<a class="anchor" aria-label="anchor" href="#calculate-the-rate"></a>
+</h3>
+<p>Create a virtual field <code>pct_no_vehicle</code>: households
+without a vehicle as a percentage of all households. Check what happens
+in Census Tract 104.</p>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Hint </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div class="accordion-body">
+<p>Field Calculator, virtual field (ticked automatically for this
+read-only layer), <strong>Decimal (double)</strong>:
+<code>"acs_hh_no_vehicle" / "acs_households" * 100</code>. Tract 104
+(Purdue residence halls) has 0 households, so the result is NULL there,
+which is correct.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="style-the-choropleth">4. Style the choropleth<a class="anchor" aria-label="anchor" href="#style-the-choropleth"></a>
+</h3>
+<p>Use <strong>Graduated</strong> symbology on
+<code>pct_no_vehicle</code> with 5 classes and a sequential color ramp.
+Look at the histogram first and choose a classification mode that suits
+a skewed distribution. Then make sure the tract with no value is shown
+as <strong>no data</strong>, not left out or colored like a low
+value.</p>
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Hint </h3>
+</button>
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div class="accordion-body">
+<ul>
+<li>In the Graduated panel, the <strong>Histogram</strong> tab (click
+<strong>Load Values</strong>) shows most tracts below 10% and a few far
+higher. <strong>Natural Breaks (Jenks)</strong> suits this.</li>
+<li>QGIS leaves features with NULL values undrawn in a Graduated style.
+To show them, open <strong>Layer Styling</strong> or <strong>Properties
+&gt; Symbology</strong>, switch to <strong>Rule-based</strong>, and add
+a rule with the filter <code>"pct_no_vehicle" IS NULL</code>, a light
+gray symbol and the label “No households (dorms)”. A quicker
+alternative: load the tracts a second time below the styled layer with a
+light gray hatch fill, and name it “No data”.</li>
+<li>Use a pale outline (white or light gray, 0.2 mm) so small tracts in
+the city stay readable.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="compose-the-layout">5. Compose the layout<a class="anchor" aria-label="anchor" href="#compose-the-layout"></a>
+</h3>
+<p>Create a print layout with the map, a title that states the finding,
+a legend with units and without extra layers, a scale bar in kilometers
+or miles, a north arrow and a source line. Add an inset or zoom on the
+cities if the small urban tracts are hard to see (optional).</p>
+<div id="accordionSpoiler5" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler5" aria-expanded="false" aria-controls="collapseSpoiler5">
+  <h3 class="accordion-header" id="headingSpoiler5">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Hint </h3>
+</button>
+<div id="collapseSpoiler5" class="accordion-collapse collapse" aria-labelledby="headingSpoiler5" data-bs-parent="#accordionSpoiler5">
+<div class="accordion-body">
+<p><a href="qgisintro.html">Getting Started with QGIS</a>, Part 6. A
+good source line: “Data: U.S. Census Bureau, American Community Survey
+2020-2024 5-year estimates, census tracts. Map by (your name), 2026.”
+For a zoom, add a second map item, set its extent to the cities, and
+tick <strong>Overviews</strong> on the main map to show where the zoom
+is.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="export-and-check">6. Export and check<a class="anchor" aria-label="anchor" href="#export-and-check"></a>
+</h3>
+<p>Export the layout as a PNG at 200 dpi or more. Then read it as a
+stranger would, using the table above.</p>
+<hr>
+<div id="challenge-a-second-map" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-a-second-map" class="callout-inner">
+<h3 class="callout-title">Challenge: A second map</h3>
+<div class="callout-content">
+<p>Make a second finished map, of the <strong>poverty rate</strong>
+(<code>below_poverty</code> as a share of
+<code>poverty_universe</code>). Many of the highest-poverty tracts are
+near Purdue. Add one sentence to the map that explains why.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Virtual field <code>poverty_rate</code> =
+<code>"acs_below_poverty" / "acs_poverty_universe" * 100</code> (NULL
+for tract 104, where the poverty universe is 0). The highest rates,
+around 70 to 80%, are in tracts near campus with many students, who
+often report low incomes while supported by family or loans. A note such
+as “Tracts near Purdue have many students, who often report low incomes”
+keeps readers from misreading the map.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="your-own-county" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="your-own-county" class="callout-inner">
+<h3 class="callout-title">Your own county</h3>
+<div class="callout-content">
+<p>To map another county, download its state’s tract boundaries from the
+Census Bureau’s <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html" class="external-link">cartographic
+boundary files</a> (a zipped shapefile can be added to QGIS without
+unzipping), filter it to your county with <strong>Filter…</strong> and
+<code>"COUNTYFP" = '157'</code> (your county’s code), and request the
+ACS table with your own Census API key as shown in the Data Collection
+module’s <a href="https://spatialturn.github.io/DataCollection/census.html" class="external-link">Census
+episode</a>. The Python version of this capstone has a ready-made cell
+for the table.</p>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>Join, then check for unmatched features</li>
+<li>Clean special codes and zero denominators before computing
+rates</li>
+<li>Pick classes that suit the distribution, and show missing data as
+its own class</li>
+<li>A finished map has a title, legend with units, scale bar, north
+arrow and source line</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Links listed here can be reused across pages as [text][name].
+Add reference-style links below as needed.
+-->
+</div>
 </section></section>
 </div>
     </main>
