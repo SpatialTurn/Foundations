@@ -1,7 +1,7 @@
 ---
 title: "Geospatial Python Basics"
 teaching: 30
-exercises: 75
+exercises: 105
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
@@ -9,6 +9,7 @@ exercises: 75
 - How does Python store and map geographic data?
 - What is a coordinate reference system, and why does it matter for measuring?
 - How do I combine a table with a map layer, or two layers with each other?
+- How is raster data different from vector data, and how do I read it?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -18,6 +19,7 @@ exercises: 75
 - Check, convert and correctly label a layer's coordinate reference system
 - Measure areas and distances in meters
 - Combine data with attribute joins and spatial joins
+- Read a raster with rasterio, summarize its cells and clip it to a polygon
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -71,6 +73,37 @@ The most common reason an attribute join fails is that the ID is text in one tab
 other. Convert both to text (and pad with `zfill()` to the right length) before joining, and always compare
 the row counts before and after. A spatial join needs both layers in the same CRS.
 
+## Raster data
+
+A **raster** covers an area with a grid of equal cells, each holding one number: an elevation, a temperature, a
+satellite reflectance, or a class code such as "forest". Rasters suit things that vary continuously across
+space, while vector data suits discrete features.
+
+| | Vector | Raster |
+|---|---|---|
+| Stores | Features with shapes and attributes | A grid of cells, one value per cell per band |
+| Detail set by | The accuracy of the shapes | The **cell size** (resolution), for example 30 m |
+| Typical files | GeoJSON, shapefile, GeoPackage | GeoTIFF |
+| Python library | GeoPandas | **rasterio** (with NumPy) |
+
+Every raster also has a CRS, an extent and a **no-data value** that marks cells with no measurement. Read the
+cells with `masked=True` so that value does not distort your statistics.
+
+```python
+import rasterio
+
+dem = rasterio.open("https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_dem.tif")
+print(dem.crs, dem.res, dem.nodata)
+elev = dem.read(1, masked=True)      # a NumPy array of elevations in meters
+print(elev.min(), elev.max())
+```
+
+Some rasters hold **measurements** (elevation, temperature): averages and histograms make sense. Others are
+**categorical** (land cover codes): count the cells of each class instead, because the average of "forest" and
+"water" means nothing. The Data Management module's
+[Geospatial Data Models](https://spatialturn.github.io/DataManagement/data-models.html) episode compares the
+two data models in more depth.
+
 :::::::::::::::::::::::::::::::::::: challenge
 
 ## Challenge 1: set_crs or to_crs?
@@ -108,12 +141,36 @@ same year, because tract boundaries change between censuses.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::: challenge
+
+## Challenge 3: Vector or raster?
+
+Which data model would you choose for each, and why?
+
+1. The locations of 17 supermarkets
+2. Air temperature across Indiana at 2 p.m.
+3. Land cover (forest, crops, water, developed) for a county
+4. Census tract boundaries with their population
+
+:::::::::::::::: solution
+
+1. **Vector** (points): a few discrete features with attributes such as a name.
+2. **Raster**: temperature varies continuously, so a grid of values fits.
+3. Usually **raster** (as in the NLCD land cover in notebook 4d), because satellites classify every cell. It can
+   be converted to polygons, but the files grow large.
+4. **Vector** (polygons): tracts are discrete areas with attributes.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - A GeoDataFrame is a pandas DataFrame plus a `geometry` column; `gpd.read_file()` reads it from the web
 - Check `.crs` first; use `to_crs()` to a projected CRS in meters before measuring, and `set_crs()` only to
   label missing CRS information
 - Attribute joins match IDs (make them the same type first); spatial joins match locations (same CRS first)
+- A raster is a grid of cells with a CRS, a cell size and a no-data value; rasterio reads it into a NumPy array
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -124,3 +181,4 @@ same year, because tract boundaries change between censuses.
 | <a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/04a_Vector_Data_with_GeoPandas.ipynb" target="_blank">4a. Vector Data with GeoPandas</a> | Read Indiana counties and Lafayette food stores, make a choropleth and layer points over polygons |
 | <a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/04b_Coordinate_Reference_Systems.ipynb" target="_blank">4b. Coordinate Reference Systems</a> | Compare areas in degrees and meters, measure a distance, and see what a wrong CRS label does |
 | <a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/04c_Joining_Tables_and_Layers.ipynb" target="_blank">4c. Joining Tables and Layers</a> | Fix a failing FIPS join, then find which stores lie inside the city limits |
+| <a href="https://colab.research.google.com/github/SpatialTurn/Foundations/blob/main/notebooks/04d_Raster_Data_with_rasterio.ipynb" target="_blank">4d. Raster Data with rasterio</a> | Read Tippecanoe County elevation and land cover, look up values at points, and clip land cover to the cities |

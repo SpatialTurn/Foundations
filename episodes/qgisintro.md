@@ -26,16 +26,19 @@ exercises: 45
 ## Before you start
 
 You need QGIS installed. If you have not installed it yet, or the interface is new to you, follow the
-[Setup page](../learners/setup.md) first. These steps were written for the QGIS 3.x Long Term Release;
-menus may differ slightly in other versions.
+[Setup page](../learners/setup.md) first. These steps were checked in **QGIS 4.0**; QGIS 3.34 and later look
+almost the same, and differences are noted where they matter.
 
 We will use two small datasets hosted with this lesson. **You do not need to download anything:** QGIS
 can read a file directly from its web address.
 
 | Dataset | Web address | Contents |
 |---|---|---|
-| Alaska airports (points) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/alaska_airports.geojson` | 76 airports with `name`, `use` (civilian, military and so on) and `elevation`. From the QGIS sample dataset. |
+| Indiana colleges (points) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_colleges.geojson` | 70 degree-granting colleges and universities with `name`, `city`, `control` (Public, Private nonprofit, Private for-profit) and `level` (4-year or 2-year). From the National Center for Education Statistics (IPEDS, 2023). |
 | Indiana counties (polygons) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_counties.geojson` | 92 counties with `pop_2012`, `land_sq_mi`, `density` (people per square mile) and `unemp_2016` (percent) |
+
+Each part below ends with a **Check** line that says what you should see. If your screen does not match, fix
+that part before moving on; most problems later come from a step that went wrong earlier.
 
 ---
 
@@ -43,11 +46,11 @@ can read a file directly from its web address.
 
 A basemap gives your data geographic context.
 
-1. In the **Browser** panel (usually on the left), expand **XYZ Tiles**.
+1. In the **Browser** panel (usually on the left), expand **XYZ Tiles**. If you do not see the Browser panel,
+   open it with **View > Panels > Browser**.
 2. Right-click **OpenStreetMap** and choose **Add Layer to Project**.
-3. A world map appears in the map canvas.
 
-If you do not see the Browser panel, open it with **View > Panels > Browser**.
+**Check:** a world map fills the map canvas, and `OpenStreetMap` is listed in the **Layers** panel.
 
 ---
 
@@ -55,16 +58,19 @@ If you do not see the Browser panel, open it with **View > Panels > Browser**.
 
 1. Go to **Layer > Add Layer > Add Vector Layer**.
 2. Under **Source Type**, choose **Protocol: HTTP(S), cloud, etc.**
-3. Leave **Type** as **HTTP/HTTPS/FTP**.
-4. In **URI**, paste the airports web address from the table above.
+3. Set **Type** to **HTTP/HTTPS/FTP**. (In QGIS 4 this list starts with cloud storage services, so check it;
+   in QGIS 3 it is already selected.)
+4. In **URI**, paste the colleges web address from the table above.
 5. Click **Add**, then **Close**.
 
-The 76 airports appear as points over Alaska, and a layer called `alaska_airports` appears in the
-**Layers** panel.
+![The Data Source Manager set up to load a layer from a web address.](fd_qgis_add_layer.png){alt="Screenshot of the QGIS Data Source Manager on the Vector page. Source Type is set to Protocol: HTTP(S), cloud, etc. Under Protocol, Type is HTTP/HTTPS/FTP and the URI box holds the web address of indiana_colleges.geojson on raw.githubusercontent.com. Authentication is left at No Authentication. The Add button is at the bottom right."}
 
-6. If the points are hidden under the basemap, drag `alaska_airports` above `OpenStreetMap` in the
+6. If the points are hidden under the basemap, drag `indiana_colleges` above `OpenStreetMap` in the
    Layers panel. Layers at the top of the list are drawn on top.
-7. Right-click the airports layer and choose **Zoom to Layer**.
+7. Right-click the colleges layer and choose **Zoom to Layer**.
+
+**Check:** about 70 points over Indiana, with clusters around Indianapolis, Fort Wayne and the Chicago suburbs
+in the northwest.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -72,7 +78,7 @@ The 76 airports appear as points over Alaska, and a layer called `alaska_airport
 
 To load a file saved on your computer instead, keep **Source Type** as **File** and browse to it. For a
 shapefile, select the `.shp` file; the `.dbf`, `.shx`, `.prj` and `.cpg` files with the same name must
-be in the same folder.
+be in the same folder. A zipped shapefile can be added directly, without unzipping.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -82,48 +88,47 @@ Save your project now (**Project > Save**, which creates a `.qgz` file) and save
 
 ## Part 3: Explore the attributes
 
-1. Right-click the airports layer and choose **Open Attribute Table**.
-2. You should see **76 rows**, one per airport, with the columns `name`, `use` and `elevation`.
-3. Click the `use` column header to sort it. How many airports are military?
+1. Right-click the colleges layer and choose **Open Attribute Table**.
+2. Click the `control` column header to sort it.
+3. Click the **Identify Features** tool (the "i" icon on the toolbar), then click one point on the map to see
+   its attributes in a panel.
 
-The attribute table holds the data behind the map. Every styling choice you make next is based on one
-of these columns.
+**Check:** the table has **70 rows**, one per college, and the columns `name`, `city`, `control`, `level` and
+`unitid` (the federal ID). 16 colleges are Public, 42 Private nonprofit and 12 Private for-profit.
 
-You can also click a single airport with the **Identify Features** tool (the "i" icon on the toolbar)
-to see its attributes.
+The attribute table holds the data behind the map. Every styling choice you make next is based on one of these
+columns. Look up Purdue: why might "Purdue University Global", an online university, appear in West Lafayette?
+(Its official address is there; locations in a dataset are not always where the activity happens.)
 
 ---
 
 ## Part 4: Style the points
 
-First, give the airports a clearer symbol than the default dot.
+Color the colleges by who runs them:
 
-1. Right-click the airports layer and choose **Properties**, then the **Symbology** tab.
-2. With **Single Symbol** selected at the top, scroll the symbol library at the bottom and choose a
-   marker such as **topo airport**. Set the **Size** to about 5 millimeters.
-3. Click **Apply**.
+1. Right-click the colleges layer and choose **Properties**, then the **Symbology** tab.
+2. At the top, change **Single Symbol** to **Categorized**.
+3. Set **Value** to `control`.
+4. Click **Classify**. Each type gets its own color. (QGIS also adds an empty "all other values" row; you can
+   leave it.)
+5. Double-click a symbol to change its color or size. Use clearly different colors, and a size of about
+   3 millimeters.
+6. Click **OK**.
 
-![Layer Properties, Symbology tab, with the topo airport marker selected](symbology.png){alt="Screenshot of the QGIS Layer Properties dialog for the airports layer on the Symbology tab. Single Symbol is selected at the top, the marker is an airplane SVG symbol called topo airport, color is black, opacity 100 percent and size 5 millimeters. The symbol library below shows topo airport, topo camp, topo hospital and topo pop capital."}
+![Layer Properties, Symbology tab, with Categorized symbology on the control field.](fd_qgis_categorized.png){alt="Screenshot of the QGIS Layer Properties dialog for the colleges layer on the Symbology tab. The renderer at the top is Categorized and Value is control. The list of classes shows three symbols and values: Public in green, Private nonprofit in purple and Private for-profit in orange, each with a matching legend label. Below the list are the Classify, plus, minus, Delete All and Delete Unused buttons, and OK, Cancel, Apply and Help at the bottom."}
 
-Now color the airports by how they are used:
-
-4. Change **Single Symbol** to **Categorized**.
-5. Set **Value** to `use`.
-6. Click **Classify**. Each airport type gets its own color.
-7. Double-click a symbol to change its color or size. Use clearly different colors (or shapes) for the
-   four types.
-8. Click **OK**.
+**Check:** three colors on the map, and three entries under the layer in the Layers panel.
 
 Each renderer is suited to a type of data:
 
 | Renderer | Use for | Example |
 |---|---|---|
-| **Single Symbol** | Showing where things are | All airports in one style |
-| **Categorized** | Categories (no order) | Airport `use` |
+| **Single Symbol** | Showing where things are | All colleges in one style |
+| **Categorized** | Categories (no order) | College `control` |
 | **Graduated** | Numbers (low to high) | County `density` |
 
 To rename the layer, as it will appear in the legend, open **Properties > Source** and change the
-**Layer name** (for example, to "Airports by use").
+**Layer name** (for example, to "Colleges by control"), or right-click it and choose **Rename Layer**.
 
 ---
 
@@ -144,6 +149,8 @@ Population density in Indiana is very skewed: most counties have fewer than 200 
 and Marion County (Indianapolis) has over 2,000. With Equal Interval, almost every county lands in the
 lightest class. Choose the mode that best shows your message, and click **OK**.
 
+**Check:** with Natural Breaks, Marion County is alone in the darkest class.
+
 ::::::::::::::::::::::::::::::::::::: callout
 
 ### Why density and not population?
@@ -155,6 +162,10 @@ counties of different sizes. See the Normalization section of the Data Visualiza
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+For the layout below, keep the counties as a light, plain background: switch their symbology back to
+**Single Symbol** with a pale fill, or untick the choropleth layer and load the counties a second time.
+A map with two strong color schemes is hard to read.
+
 ---
 
 ## Part 6: Create a map layout
@@ -165,17 +176,22 @@ To export a finished map with all its elements, use a **Print Layout**.
 2. **Add the map:** choose **Add Item > Add Map**, then click and drag a rectangle on the page.
 3. **Add a title:** choose **Add Item > Add Label**, drag a box above the map, and type your title in the
    **Item Properties** panel. Make it large.
-4. **Add a legend:** choose **Add Item > Add Legend** and drag a box. In Item Properties, you can rename
-   entries and remove the basemap from the legend.
+4. **Add a legend:** choose **Add Item > Add Legend** and drag a box. In Item Properties, untick **Auto
+   update**, then remove the basemap from the legend with the minus button and rename entries by
+   double-clicking them.
 5. **Add a scale bar:** choose **Add Item > Add Scale Bar**. Set the units to miles or kilometers.
 6. **Add a north arrow:** choose **Add Item > Add North Arrow**.
 7. **Add a source line:** add another label at the bottom with the data source and your name, for
-   example "Data: U.S. Census Bureau, BLS. Map by A. Student, 2026."
-
-![Print Layout with the Add Item menu open](additemmap.png){alt="Screenshot of the QGIS Print Layout window titled Airports in Alaska. The Add Item menu is open, listing Add Map, Add 3D Map, Add Picture, Add Label, Add Dynamic Text, Add Legend, Add Scale Bar, Add North Arrow, Add Shape and other items. The page shows a map frame containing Alaska with airport symbols over an OpenStreetMap basemap."}
+   example "Data: NCES IPEDS 2023; U.S. Census Bureau. Basemap: OpenStreetMap contributors. Map by A. Student,
+   2026."
 
 Use **Item Properties** to change fonts, sizes and frames. Use the **Move Item Content** tool to pan
 the map inside its frame without moving the frame.
+
+![The Print Layout window with a finished page.](fd_qgis_layout.png){alt="Screenshot of the QGIS Print Layout window. The toolbar on the left has the tools for adding items (map, picture, label, legend, scale bar, north arrow, shapes and more). The A4 page in the middle holds a title, a map of Indiana counties with colleges shown as colored dots, a north arrow at the top left of the map, a legend titled Colleges by control at the lower right, a scale bar from 0 to 100 km at the lower left and a source line under the map. The Items panel on the right lists the six items: the source label, the picture (north arrow), the scale bar, the legend, the title label and Map 1."}
+
+**Check:** the page shows the map, a title, a legend without the basemap, a scale bar, a north arrow and a
+source line.
 
 ---
 
@@ -185,16 +201,17 @@ the map inside its frame without moving the frame.
 2. Choose a file name and location and accept the default options.
 3. Save the project again (`.qgz`). The layout is saved inside the project.
 
-![An example finished layout: airports in Alaska](airportmap.png){alt="A finished QGIS map titled Airports in Alaska, USA. Black airplane symbols mark 76 airports across Alaska over an OpenStreetMap basemap that also shows western Canada. A legend lists Alaska Airports and OpenStreetMap, with a north arrow and a scale bar from 0 to 500 kilometers. Author and date appear below the map."}
+This example uses a plain county background instead of the basemap, which often reads better on paper.
 
-This example uses a single airport symbol. Your version will also show the airport types from Part 4.
-Notice that it is missing one element from our list: a **data source** line.
+![An example finished layout: colleges and universities in Indiana.](fd_qgis_final_map.png){alt="A finished QGIS map titled Colleges and universities in Indiana, by control. Indiana's 92 counties are drawn in pale gray with thin outlines, and colleges are colored dots: green for Public, purple for Private nonprofit and orange for Private for-profit. The dots cluster around Indianapolis, Fort Wayne, South Bend and the Chicago suburbs in the northwest. A legend at the lower right lists the three types, a scale bar from 0 to 100 km sits at the lower left, a north arrow at the upper left, and a source line under the map credits NCES IPEDS 2023 and the U.S. Census Bureau."}
 
 ---
 
 ## Common beginner mistakes
 
 - Forgetting to save the project
+- Loading a web address with the wrong protocol **Type** (Part 2): the layer fails to load
+- Data loaded but not visible: use **Zoom to Layer** and check the layer order
 - Mapping counts instead of rates on a choropleth map
 - Leaving layer names such as `indiana_counties` in the legend
 - Using too many classes or a rainbow color ramp
@@ -242,17 +259,20 @@ Using the Indiana counties layer, create and export a finished map of **2016 une
 
 :::::::::::::::::::::::::::::::::::: challenge
 
-## Challenge 2: Fix the projection (optional)
+## Challenge 2: Show and label only public universities (optional)
 
-Alaska looks stretched over the OpenStreetMap basemap, which uses Web Mercator. Change the project's
-coordinate reference system to one designed for Alaska and compare.
+Make the colleges layer show only **public 4-year** institutions, and label them with their names.
 
 :::::::::::::::::::::::::::::::::: solution
 
-Click the **EPSG code** in the bottom-right corner of the QGIS window (or **Project > Properties > CRS**),
-search for **3338** (NAD83 / Alaska Albers), select it and click **OK**. The map is redrawn in an equal
-area projection for Alaska, and the state no longer looks enormously stretched. The basemap is
-reprojected too, although its labels may look slightly blurred.
+1. Right-click the colleges layer and choose **Filter...**. Enter the expression
+   `"control" = 'Public' AND "level" = '4-year or above'` and click **OK**. The layer now shows only those
+   features (the filter icon appears next to its name), and the attribute table lists only them.
+2. Open **Properties > Labels**, choose **Single Labels**, set **Value** to `name`, and click **OK**.
+3. To show everything again, open **Filter...** and clear the expression.
+
+Field names go in double quotes and text values in single quotes; mixing them up is the most common
+expression error.
 
 ::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -270,7 +290,9 @@ with a wrong or missing CRS. Two habits avoid most problems:
   projected system in meters, such as **EPSG:26916** (UTM zone 16N) for Indiana.
 - If a layer appears in the wrong place, check its CRS before anything else.
 
-Notebook 4b in this module shows the same ideas in Python, and the Data Management module's
+Try it: click the EPSG code in the bottom-right corner, search for **26916**, and click **OK**. Indiana looks
+slightly narrower and less stretched than on the Web Mercator basemap. Notebook 4b in this module shows the
+same ideas in Python, and the Data Management module's
 [Coordinate Reference Systems](https://spatialturn.github.io/DataManagement/crs.html) episode explains
 the theory.
 
@@ -294,7 +316,8 @@ the theory.
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Add Vector Layer with the HTTP(S) protocol loads data straight from a web address.
+- Add Vector Layer with the HTTP(S) protocol (Type HTTP/HTTPS/FTP) loads data straight from a web address.
+- Use the Check lines: Zoom to Layer and layer order solve most "missing data" problems.
 - The attribute table holds the data behind every styling choice.
 - Use Categorized for categories and Graduated for numbers, and compare classification modes.
 - A Print Layout combines the map with its title, legend, scale bar, north arrow and source.

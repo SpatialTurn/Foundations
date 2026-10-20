@@ -72,7 +72,10 @@ episodes:
 - python-basics.md
 - working-with-data.md
 - geospatial-python.md
+- map-your-county-python.md
 - qgisintro.md
+- qgis-tables.md
+- map-your-county-qgis.md
 
 # Information for Learners
 learners: 
