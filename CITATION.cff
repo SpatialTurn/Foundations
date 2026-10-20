@@ -37,7 +37,11 @@ keywords:
   - matplotlib
   - GeoPandas
   - coordinate reference systems
+  - rasterio
   - QGIS
+  - table joins
+  - choropleth maps
+  - American Community Survey
   - beginners
   - social science
 repository-code: "https://github.com/SpatialTurn/Foundations"
