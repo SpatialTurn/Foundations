@@ -92,14 +92,16 @@ After this module, the curriculum follows the life of a research dataset:
    systems and planning
 2. [Data Collection](https://spatialturn.github.io/DataCollection/): repositories, census data,
    geocoding, imagery and field data
-3. [Data Analysis](https://spatialturn.github.io/DataAnalysis/): geoprocessing (buffers, overlays and
-   distances, in QGIS and Python), then network analysis, spatial autocorrelation, clustering and NDVI
-4. [Data Visualization](https://spatialturn.github.io/DataVisualization/): charts, map design and
-   accessibility
-5. [Data Curation](https://spatialturn.github.io/DataCuration/): metadata, documentation, preservation
+3. [Data Processing](https://spatialturn.github.io/DataProcessing/): cleaning real data, geoprocessing
+   (buffers, overlays and distances), raster processing and automating repeated steps, in QGIS and Python
+4. [Data Analysis](https://spatialturn.github.io/DataAnalysis/): network analysis, spatial autocorrelation,
+   clustering and NDVI
+5. [Data Visualization](https://spatialturn.github.io/DataVisualization/): charts, map design, finished maps
+   and accessibility
+6. [Data Curation](https://spatialturn.github.io/DataCuration/): metadata, documentation, preservation
    and sharing
-6. [Case Studies](https://spatialturn.github.io/CaseStudies/): food deserts and grocery access, from
-   start to finish
+7. [Case Studies](https://spatialturn.github.io/CaseStudies/): park access, food deserts and grocery access,
+   from start to finish
 
 :::::::::::::::::::::::::::::::::::: challenge
 
