@@ -55,6 +55,16 @@ own:
 
 ## Steps
 
+::::::::::::::::::::::::::::::::::::: callout
+
+### If QGIS asks you to choose a transformation
+
+When layers in latitude and longitude (EPSG:4326) are drawn in a project in UTM (EPSG:26916), QGIS may open a
+window that begins "Multiple operations are possible for converting coordinates". For this county any of the
+options is accurate to a few meters: keep the first (highlighted) one and click **OK**.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### 1. Start a project
 
 Create a folder for the capstone, start a new QGIS project and save it there. Set the project CRS to
