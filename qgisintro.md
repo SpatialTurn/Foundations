@@ -32,10 +32,15 @@ almost the same, and differences are noted where they matter.
 We will use two small datasets hosted with this lesson. **You do not need to download anything:** QGIS
 can read a file directly from its web address.
 
-| Dataset | Web address | Contents |
+| Dataset | File | Contents |
 |---|---|---|
-| Indiana colleges (points) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_colleges.geojson` | 70 degree-granting colleges and universities with `name`, `city`, `control` (Public, Private nonprofit, Private for-profit) and `level` (4-year or 2-year). From the National Center for Education Statistics (IPEDS, 2023). |
-| Indiana counties (polygons) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_counties.geojson` | 92 counties with `pop_2012`, `land_sq_mi`, `density` (people per square mile) and `unemp_2016` (percent) |
+| Indiana colleges (points) | `indiana_colleges.geojson` | 70 degree-granting colleges and universities with `name`, `city`, `control` (Public, Private nonprofit, Private for-profit) and `level` (4-year or 2-year). From the National Center for Education Statistics (IPEDS, 2023). |
+| Indiana counties (polygons) | `indiana_counties.geojson` | 92 counties with `pop_2012`, `land_sq_mi`, `density` (people per square mile) and `unemp_2016` (percent) |
+
+Web addresses to copy:
+
+- **Indiana colleges (points)**: `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_colleges.geojson`
+- **Indiana counties (polygons)**: `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/indiana_counties.geojson`
 
 Each part below ends with a **Check** line that says what you should see. If your screen does not match, fix
 that part before moving on; most problems later come from a step that went wrong earlier.
@@ -60,7 +65,7 @@ A basemap gives your data geographic context.
 2. Under **Source Type**, choose **Protocol: HTTP(S), cloud, etc.**
 3. Set **Type** to **HTTP/HTTPS/FTP**. (In QGIS 4 this list starts with cloud storage services, so check it;
    in QGIS 3 it is already selected.)
-4. In **URI**, paste the colleges web address from the table above.
+4. In **URI**, paste the colleges web address from the list above.
 5. Click **Add**, then **Close**.
 
 ![The Data Source Manager set up to load a layer from a web address.](fd_qgis_add_layer.png){alt="Screenshot of the QGIS Data Source Manager on the Vector page. Source Type is set to Protocol: HTTP(S), cloud, etc. Under Protocol, Type is HTTP/HTTPS/FTP and the URI box holds the web address of indiana_colleges.geojson on raw.githubusercontent.com. Authentication is left at No Authentication. The Add button is at the bottom right."}

@@ -30,10 +30,15 @@ applied GIS, and also the most common place for silent mistakes.
 
 This episode uses Tippecanoe County, Indiana (Lafayette and West Lafayette):
 
-| Dataset | Web address | Contents |
+| Dataset | File | Contents |
 |---|---|---|
-| Census tracts (polygons) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson` | 43 tracts with `GEOID`, `name` and land area `aland_m2` |
-| ACS 2024 table (no shapes) | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv` | One row per tract: `GEOID`, `total_pop`, `pop_under18`, `median_income`, `poverty_universe`, `below_poverty`, `households`, `hh_no_vehicle` |
+| Census tracts (polygons) | `tippecanoe_tracts.geojson` | 43 tracts with `GEOID`, `name` and land area `aland_m2` |
+| ACS 2024 table (no shapes) | `tippecanoe_acs_2024.csv` | One row per tract: `GEOID`, `total_pop`, `pop_under18`, `median_income`, `poverty_universe`, `below_poverty`, `households`, `hh_no_vehicle` |
+
+Web addresses to copy:
+
+- **Census tracts (polygons)**: `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson`
+- **ACS 2024 table (no shapes)**: `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv`
 
 The table holds 2024 American Community Survey (ACS) 5-year estimates, downloaded once from the Census API for
 this lesson. The Data Collection module's [Census episode](https://spatialturn.github.io/DataCollection/census.html)

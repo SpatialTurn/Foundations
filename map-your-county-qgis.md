@@ -34,10 +34,15 @@ experience can understand.
 The data is the same as in the [Python version](map-your-county-python.md) of this capstone, so you can compare
 your result with a colleague who uses Python:
 
-| Dataset | Web address |
+| Dataset | File |
 |---|---|
-| Census tracts | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson` |
-| ACS 2024 table | `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv` |
+| Census tracts | `tippecanoe_tracts.geojson` |
+| ACS 2024 table | `tippecanoe_acs_2024.csv` |
+
+Web addresses to copy:
+
+- **Census tracts**: `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson`
+- **ACS 2024 table**: `https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv`
 
 ## What a finished map needs
 
