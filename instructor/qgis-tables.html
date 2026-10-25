@@ -363,7 +363,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Tables, Joins and Selections in QGIS</h1>
-        <p>Last updated on 2026-10-20 |
+        <p>Last updated on 2026-10-25 |
 
         <a href="https://github.com/SpatialTurn/Foundations/edit/main/episodes/qgis-tables.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -417,21 +417,30 @@ also the most common place for silent mistakes.</p>
 <p>This episode uses Tippecanoe County, Indiana (Lafayette and West
 Lafayette):</p>
 <table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr><th>Dataset</th>
-<th>Web address</th>
+<th>File</th>
 <th>Contents</th>
 </tr></thead><tbody><tr><td>Census tracts (polygons)</td>
-<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson</code></td>
+<td><code>tippecanoe_tracts.geojson</code></td>
 <td>43 tracts with <code>GEOID</code>, <code>name</code> and land area
 <code>aland_m2</code>
 </td>
 </tr><tr><td>ACS 2024 table (no shapes)</td>
-<td><code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv</code></td>
+<td><code>tippecanoe_acs_2024.csv</code></td>
 <td>One row per tract: <code>GEOID</code>, <code>total_pop</code>,
 <code>pop_under18</code>, <code>median_income</code>,
 <code>poverty_universe</code>, <code>below_poverty</code>,
 <code>households</code>, <code>hh_no_vehicle</code>
 </td>
-</tr></tbody></table><p>The table holds 2024 American Community Survey (ACS) 5-year
+</tr></tbody></table><p>Web addresses to copy:</p>
+<ul><li>
+<strong>Census tracts (polygons)</strong>:
+<code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_tracts.geojson</code>
+</li>
+<li>
+<strong>ACS 2024 table (no shapes)</strong>:
+<code>https://raw.githubusercontent.com/SpatialTurn/Foundations/main/data/tippecanoe_acs_2024.csv</code>
+</li>
+</ul><p>The table holds 2024 American Community Survey (ACS) 5-year
 estimates, downloaded once from the Census API for this lesson. The Data
 Collection module’s <a href="https://spatialturn.github.io/DataCollection/census.html" class="external-link">Census
 episode</a> shows how to request them yourself. The same steps in Python
@@ -681,7 +690,7 @@ which tract cannot have one?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Expression:
 <code>"acs_below_poverty" / "acs_poverty_universe" * 100</code>. The
@@ -714,7 +723,7 @@ in QGIS?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The table’s <code>GEOID</code> was read as a <strong>number</strong>,
 which dropped the leading zero, so <code>1001</code> never matches the
@@ -750,7 +759,7 @@ Discuss.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>It depends on the question. For <strong>planning a service</strong>,
 the <strong>count</strong> matters: a large tract with 5% carless
@@ -849,7 +858,7 @@ Add reference-style links below as needed.
   "url": "https://SpatialTurn.github.io/Foundations/instructor/qgis-tables.html",
   "identifier": "https://SpatialTurn.github.io/Foundations/instructor/qgis-tables.html",
   "dateCreated": "2026-10-17",
-  "dateModified": "2026-10-20",
+  "dateModified": "2026-10-25",
   "datePublished": "2026-10-25"
 }
 
